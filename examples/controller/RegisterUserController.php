@@ -8,12 +8,19 @@ use Broadway\CommandHandling\CommandBusInterface;
 use Milio\User\Domain\Write\Handler\RegisterUserCommandHandler;
 use Milio\User\Domain\Write\Model\UserWriteRepository;
 use Milio\User\Domain\Utils\TestUtils;
+use Milio\User\Domain\Read\Projector\UserReadModelProjector;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
-//make repository
+//the readmodel projector
+$userReadModelProjector = new UserReadModelprojector();
+
+//The event store
 $eventStore = new InMemoryEventStore();
+
+//the event bus
 $eventBus = new TraceableEventBus(new SimpleEventBus());
+$eventBus->subscribe(new UserReadModelProjector);
 
 $repository = new UserWriteRepository($eventStore, $eventBus);
 
@@ -23,6 +30,7 @@ $commandHandler = new RegisterUserCommandHandler($repository);
 //make command bus
 $commandBus= new SimpleCommandBus();
 $commandBus->subscribe($commandHandler);
+
 
 $controller = new CreateUserController($commandBus);
 $controller->updateAction();

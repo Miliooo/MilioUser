@@ -17,4 +17,5 @@ namespace Milio\User\CQRS\CommandHandling\Interceptors;
  */
 interface CommandDispatchInterceptorInterface
 {
+    public function handle();
 }

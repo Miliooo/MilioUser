@@ -8,7 +8,6 @@ use Broadway\EventStore\InMemoryEventStore;
 use Broadway\CommandHandling\SimpleCommandBus;
 use Broadway\CommandHandling\CommandBusInterface;
 use Milio\User\Write\Handler\RegisterUserCommandHandler;
-use Milio\User\Write\Listener\VarDumpListener;
 use Milio\User\Write\Model\UserWriteRepository;
 use Milio\User\Utils\TestUtils;
 
@@ -17,7 +16,7 @@ require_once __DIR__ . '/../../bootstrap.php';
 //make repository
 $eventStore = new InMemoryEventStore();
 $eventBus = new TraceableEventBus(new SimpleEventBus());
-$eventBus->subscribe(new VarDumpListener());
+
 $repository = new UserWriteRepository($eventStore, $eventBus);
 
 //make command handler
@@ -27,8 +26,8 @@ $commandHandler = new RegisterUserCommandHandler($repository);
 $commandBus= new SimpleCommandBus();
 $commandBus->subscribe($commandHandler);
 
-
-new CreateUserController($commandBus);
+$controller = new CreateUserController($commandBus);
+$controller->updateAction();
 
 /**
  * Class CreateUserController
@@ -37,12 +36,33 @@ new CreateUserController($commandBus);
  */
 class CreateUserController
 {
+    private $commandBus;
+
     /**
      * @param CommandBusInterface $commandBus
      */
     public function __construct(CommandBusInterface $commandBus)
     {
+        $this->commandBus = $commandBus;
+    }
+
+    /**
+     *
+     */
+    public function updateAction()
+    {
+        //get the data from the form
+
+        //validate the command object
+
+        //send it to the bus
         $command = TestUtils::getRegisterUserCommand();
-        $commandBus->dispatch($command);
+        $this->commandBus->dispatch($command);
+
+        //when asynchronous need to redirect to other page and do some polling or pray for the best
+
+        echo 'registering '.$command->username."\n";
+        //when synchronous wait for response and decide on that
+        echo 'response'."\n\n";
     }
 }

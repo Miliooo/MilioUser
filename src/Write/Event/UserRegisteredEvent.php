@@ -8,8 +8,6 @@ use Milio\User\ValueObjects\Password;
 /**
  * User registered event.
  *
- * @todo Consider just passing the command to it? It has all the same data.
- *
  * @author Michiel Boeckaert <boeckaert@gmail.com>
  */
 class UserRegisteredEvent

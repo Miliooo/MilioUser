@@ -44,13 +44,13 @@ class RegisterUserCommand
     /**
      * Constructor.
      *
-     * @param UserId   $userId
-     * @param          $username
-     * @param          $email
-     * @param Password $password
-     * @param          $dateRegistered
+     * @param UserId    $userId
+     * @param string    $username
+     * @param string    $email
+     * @param Password  $password
+     * @param \DateTime $dateRegistered
      */
-    public function __construct(UserId $userId, $username, $email, Password $password, $dateRegistered)
+    public function __construct(UserId $userId, $username, $email, Password $password, \DateTime $dateRegistered)
     {
         $this->userId = $userId;
         $this->username= $username;

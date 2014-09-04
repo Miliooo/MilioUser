@@ -1,9 +1,9 @@
 <?php
 
-namespace Milio\User\Write\Event;
+namespace Milio\User\Domain\Write\Event;
 
-use Milio\User\ValueObjects\UserId;
-use Milio\User\ValueObjects\Password;
+use Milio\User\Domain\ValueObjects\UserId;
+use Milio\User\Domain\ValueObjects\Password;
 
 /**
  * User registered event.
@@ -19,7 +19,7 @@ class UserRegisteredEvent
     private $dateRegistered;
 
     /**
-     * @param UserId    $userId
+     * @param \Milio\User\Domain\ValueObjects\UserId    $userId
      * @param           $username
      * @param           $email
      * @param Password  $password
@@ -59,7 +59,7 @@ class UserRegisteredEvent
     }
 
     /**
-     * @return UserId
+     * @return \Milio\User\Domain\ValueObjects\UserId
      */
     public function getUserId()
     {

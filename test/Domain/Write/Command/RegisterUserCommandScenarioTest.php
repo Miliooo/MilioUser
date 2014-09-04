@@ -1,15 +1,15 @@
 <?php
 
-namespace Milio\User\Write\Command;
+namespace Milio\User\Domain\Write\Command;
 
 use Broadway\CommandHandling\Testing\CommandHandlerScenarioTestCase;
 use Broadway\EventStore\EventStoreInterface;
 use Broadway\EventHandling\EventBusInterface;
 use Broadway\CommandHandling\CommandHandlerInterface;
-use Milio\User\Write\Handler\RegisterUserCommandHandler;
-use Milio\User\Utils\TestUtils;
-use Milio\User\Write\Event\UserRegisteredEvent;
-use Milio\User\Write\Model\UserWriteRepository;
+use Milio\User\Domain\Write\Handler\RegisterUserCommandHandler;
+use Milio\User\Domain\Utils\TestUtils;
+use Milio\User\Domain\Write\Event\UserRegisteredEvent;
+use Milio\User\Domain\Write\Model\UserWriteRepository;
 
 /**
  * Class RegisterUserCommandFunctionalTest

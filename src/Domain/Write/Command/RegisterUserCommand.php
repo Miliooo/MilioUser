@@ -1,9 +1,9 @@
 <?php
 
-namespace Milio\User\Write\Command;
+namespace Milio\User\Domain\Write\Command;
 
-use Milio\User\ValueObjects\UserId;
-use Milio\User\ValueObjects\Password;
+use Milio\User\Domain\ValueObjects\UserId;
+use Milio\User\Domain\ValueObjects\Password;
 
 /**
  * Those properties are public for the moment since we want the form to be able to populate this.

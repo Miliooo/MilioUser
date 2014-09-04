@@ -1,8 +1,8 @@
 <?php
 
-namespace Milio\User\Write\Command;
+namespace Milio\User\Domain\Write\Command;
 
-use Milio\User\Utils\TestUtils;
+use Milio\User\Domain\Utils\TestUtils;
 
 /**
  * Test file for the RegisterUserCommand

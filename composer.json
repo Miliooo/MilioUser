@@ -1,5 +1,5 @@
 {
-    "name": "milio/user-write",
+    "name": "milio/user-cqrs",
     "description": "user events CQRS",
     "license": "MIT",
     "authors": [

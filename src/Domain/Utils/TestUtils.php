@@ -1,10 +1,10 @@
 <?php
 
-namespace Milio\User\Utils;
+namespace Milio\User\Domain\Utils;
 
-use Milio\User\ValueObjects\Password;
-use Milio\User\ValueObjects\StringUserId;
-use Milio\User\Write\Command\RegisterUserCommand;
+use Milio\User\Domain\ValueObjects\Password;
+use Milio\User\Domain\ValueObjects\StringUserId;
+use Milio\User\Domain\Write\Command\RegisterUserCommand;
 
 /**
  * Class TestUtils

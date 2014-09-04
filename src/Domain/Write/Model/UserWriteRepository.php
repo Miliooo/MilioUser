@@ -1,6 +1,6 @@
 <?php
 
-namespace Milio\User\Write\Model;
+namespace Milio\User\Domain\Write\Model;
 
 use Broadway\EventSourcing\EventSourcingRepository;
 use Broadway\EventStore\EventStoreInterface;
@@ -19,6 +19,6 @@ class UserWriteRepository extends EventSourcingRepository
      */
     public function __construct(EventStoreInterface $eventStore, EventBusInterface $eventBus)
     {
-        parent::__construct($eventStore, $eventBus, 'Milio\User\Write\Model\UserWrite');
+        parent::__construct($eventStore, $eventBus, 'Milio\User\Domain\Write\Model\UserWrite');
     }
 }

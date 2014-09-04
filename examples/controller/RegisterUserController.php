@@ -1,15 +1,13 @@
 <?php
 
-namespace Milio\User\Controller;
-
 use Broadway\EventHandling\SimpleEventBus;
 use Broadway\EventHandling\TraceableEventBus;
 use Broadway\EventStore\InMemoryEventStore;
 use Broadway\CommandHandling\SimpleCommandBus;
 use Broadway\CommandHandling\CommandBusInterface;
-use Milio\User\Write\Handler\RegisterUserCommandHandler;
-use Milio\User\Write\Model\UserWriteRepository;
-use Milio\User\Utils\TestUtils;
+use Milio\User\Domain\Write\Handler\RegisterUserCommandHandler;
+use Milio\User\Domain\Write\Model\UserWriteRepository;
+use Milio\User\Domain\Utils\TestUtils;
 
 require_once __DIR__ . '/../../bootstrap.php';
 

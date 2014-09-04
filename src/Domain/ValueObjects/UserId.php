@@ -1,6 +1,6 @@
 <?php
 
-namespace Milio\User\ValueObjects;
+namespace Milio\User\Domain\ValueObjects;
 
 /**
  * Makes it possible to extend this.

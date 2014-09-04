@@ -1,10 +1,9 @@
 <?php
 
-namespace test\Write\Model;
+namespace Milio\User\Domain\Write\Model;
 
-use Milio\User\Write\Model\UserWrite;
-use Milio\User\ValueObjects\Password;
-use Milio\User\ValueObjects\StringUserId;
+use Milio\User\Domain\ValueObjects\Password;
+use Milio\User\Domain\ValueObjects\StringUserId;
 
 /**
  * Test file for the user write model.
@@ -26,7 +25,7 @@ class UserWriteTest extends \PHPUnit_Framework_TestCase
             new \DateTime('now')
         );
 
-        $this->assertInstanceOf('Milio\User\Write\Model\UserWrite', $user);
+        $this->assertInstanceOf('Milio\User\Domain\Write\Model\UserWrite', $user);
         $this->assertAttributeEquals('name', 'username', $user);
         $this->assertAttributeEquals('hashed', 'hashedPassword', $user);
     }

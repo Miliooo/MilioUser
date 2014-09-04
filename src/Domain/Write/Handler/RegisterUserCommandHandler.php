@@ -1,11 +1,11 @@
 <?php
 
-namespace Milio\User\Write\Handler;
+namespace Milio\User\Domain\Write\Handler;
 
 use Broadway\CommandHandling\CommandHandler;
-use Milio\User\Write\Command\RegisterUserCommand;
-use Milio\User\Write\Model\UserWriteRepository;
-use Milio\User\Write\Model\UserWrite;
+use Milio\User\Domain\Write\Command\RegisterUserCommand;
+use Milio\User\Domain\Write\Model\UserWriteRepository;
+use Milio\User\Domain\Write\Model\UserWrite;
 
 /**
  * Class RegisterUserCommandHandler
@@ -28,7 +28,7 @@ class RegisterUserCommandHandler extends CommandHandler
     }
 
     /**
-     * @param RegisterUserCommand $command
+     * @param \Milio\User\Domain\Write\Command\RegisterUserCommand $command
      */
     public function handleRegisterUserCommand(RegisterUserCommand $command)
     {

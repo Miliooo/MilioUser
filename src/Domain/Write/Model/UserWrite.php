@@ -1,11 +1,11 @@
 <?php
 
-namespace Milio\User\Write\Model;
+namespace Milio\User\Domain\Write\Model;
 
 use Broadway\EventSourcing\EventSourcedAggregateRoot;
-use Milio\User\ValueObjects\Password;
-use Milio\User\ValueObjects\UserId;
-use Milio\User\Write\Event\UserRegisteredEvent;
+use Milio\User\Domain\ValueObjects\Password;
+use Milio\User\Domain\ValueObjects\UserId;
+use Milio\User\Domain\Write\Event\UserRegisteredEvent;
 
 /**
  * Class User
@@ -15,7 +15,7 @@ use Milio\User\Write\Event\UserRegisteredEvent;
 class UserWrite extends EventSourcedAggregateRoot
 {
     /**
-     * @var UserId
+     * @var \Milio\User\Domain\ValueObjects\UserId
      */
     protected $userId;
 
@@ -48,7 +48,7 @@ class UserWrite extends EventSourcedAggregateRoot
      *
      * To consider, do we need this constructor.
      *
-     * @param UserId    $userId
+     * @param \Milio\User\Domain\ValueObjects\UserId    $userId
      * @param           $username
      * @param           $email
      * @param Password  $password

@@ -30,9 +30,9 @@ class UserWrite extends EventSourcedAggregateRoot
     protected $email;
 
     /**
-     * @var string
+     * @var string The hashed password
      */
-    protected $hashedPassword;
+    protected $password;
 
     /**
      * @var string
@@ -71,7 +71,7 @@ class UserWrite extends EventSourcedAggregateRoot
      *
      * @return static
      */
-    public static function registerUser(UserId $userId, $username, $email,  $password, \DateTime $dateRegistered)
+    public static function registerUser(UserId $userId, $username, $email, $password, \DateTime $dateRegistered)
     {
         $user =  new self($userId, $username, $email, $password, $dateRegistered);
         $user->apply(new UserRegisteredEvent($userId, $username, $email, $password, $dateRegistered));
@@ -87,7 +87,7 @@ class UserWrite extends EventSourcedAggregateRoot
         $this->userId = $event->getUserId();
         $this->username = $event->getUsername();
         $this->email = $event->getEmail();
-        $this->hashedPassword = $event->getPassword()->getHashedPassword();
+        $this->password = $event->getPassword()->getHashedPassword();
         $this->salt = $event->getPassword()->getSalt();
         $this->dateRegistered = $event->getDateRegistered();
     }

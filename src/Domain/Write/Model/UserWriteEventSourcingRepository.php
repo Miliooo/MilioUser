@@ -11,7 +11,7 @@ use Broadway\EventHandling\EventBusInterface;
  *
  * @author Michiel Boeckaert <boeckaert@gmail.com>
  */
-class UserWriteRepository extends EventSourcingRepository
+class UserWriteEventSourcingRepository extends EventSourcingRepository
 {
     /**
      * @param EventStoreInterface $eventStore

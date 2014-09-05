@@ -11,9 +11,25 @@ use Broadway\ReadModel\ReadModelInterface;
  */
 class UserRead implements ReadModelInterface
 {
+    /**
+     * @var string
+     */
     public $id;
 
-    public $name;
+    /**
+     * @var string
+     */
+    public $username;
+
+    /**
+     * @var string The hashed password
+     */
+    public $password;
+
+    /**
+     * @var \DateTime
+     */
+    public $dateRegistered;
 
     /**
      * @return string
@@ -21,5 +37,29 @@ class UserRead implements ReadModelInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return string The username
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * @return string The password
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateRegistered()
+    {
+        return $this->dateRegistered;
     }
 }

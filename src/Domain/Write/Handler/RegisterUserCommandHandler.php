@@ -4,7 +4,7 @@ namespace Milio\User\Domain\Write\Handler;
 
 use Broadway\CommandHandling\CommandHandler;
 use Milio\User\Domain\Write\Command\RegisterUserCommand;
-use Milio\User\Domain\Write\Model\UserWriteRepository;
+use Milio\User\Domain\Write\Model\UserWriteEventSourcingRepository;
 use Milio\User\Domain\Write\Model\UserWrite;
 
 /**
@@ -15,20 +15,20 @@ use Milio\User\Domain\Write\Model\UserWrite;
 class RegisterUserCommandHandler extends CommandHandler
 {
     /**
-     * @var UserWriteRepository
+     * @var UserWriteEventSourcingRepository
      */
     private $repository;
 
     /**
-     * @param UserWriteRepository $repository
+     * @param UserWriteEventSourcingRepository $repository
      */
-    public function __construct(UserWriteRepository $repository)
+    public function __construct(UserWriteEventSourcingRepository $repository)
     {
         $this->repository = $repository;
     }
 
     /**
-     * @param \Milio\User\Domain\Write\Command\RegisterUserCommand $command
+     * @param RegisterUserCommand $command
      */
     public function handleRegisterUserCommand(RegisterUserCommand $command)
     {

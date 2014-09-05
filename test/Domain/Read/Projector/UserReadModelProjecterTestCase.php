@@ -1,13 +1,5 @@
 <?php
 
-/*
-* This file is part of the MilioooFriendsBundle package.
-*
-* (c) Michiel boeckaert <boeckaert@gmail.com>
-* This source file is subject to the MIT license that is bundled
-* with this source code in the file LICENSE.
-*/
-
 namespace Milio\User\Domain\Read\Projector;
 
 use Broadway\ReadModel\InMemory\InMemoryRepository;
@@ -25,11 +17,14 @@ class UserReadModelProjectorTestCase extends ProjectorScenarioTestCase
     /**
      * @test
      */
-    public function testIt()
+    public function it_should_update_the_model()
     {
         $userRegisteredEvent = TestUtils::getUserRegisteredEvent();
         $expectedUserModel = new UserRead();
-        $expectedUserModel->name = TestUtils::getUsername();
+        $expectedUserModel->id = (string) TestUtils::getUserId();
+        $expectedUserModel->username = TestUtils::getUsername();
+        $expectedUserModel->dateRegistered = TestUtils::getDateTime();
+        $expectedUserModel->password = TestUtils::getPasswordVO()->getHashedPassword();
 
         $this->scenario->given([$userRegisteredEvent])
             ->when($userRegisteredEvent)

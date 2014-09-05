@@ -9,7 +9,7 @@ use Broadway\CommandHandling\CommandHandlerInterface;
 use Milio\User\Domain\Write\Handler\RegisterUserCommandHandler;
 use Milio\User\Domain\Utils\TestUtils;
 use Milio\User\Domain\Write\Event\UserRegisteredEvent;
-use Milio\User\Domain\Write\Model\UserWriteRepository;
+use Milio\User\Domain\Write\Model\UserWriteEventSourcingRepository;
 
 /**
  * Class RegisterUserCommandFunctionalTest
@@ -45,7 +45,7 @@ class RegisterUserCommandScenarioTestCase extends CommandHandlerScenarioTestCase
      */
     protected function createCommandHandler(EventStoreInterface $eventStore, EventBusInterface $eventBus)
     {
-        $repository = new UserWriteRepository($eventStore, $eventBus);
+        $repository = new UserWriteEventSourcingRepository($eventStore, $eventBus);
 
         return new RegisterUserCommandHandler($repository);
     }

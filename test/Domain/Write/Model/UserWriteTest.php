@@ -27,6 +27,6 @@ class UserWriteTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('Milio\User\Domain\Write\Model\UserWrite', $user);
         $this->assertAttributeEquals('name', 'username', $user);
-        $this->assertAttributeEquals('hashed', 'hashedPassword', $user);
+        $this->assertAttributeEquals('hashed', 'password', $user);
     }
 }

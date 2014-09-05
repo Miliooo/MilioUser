@@ -12,7 +12,7 @@
 - Het bevat wellicht minstens een id, je moet toch weten voor wie iets gebeurd is
 
 ### Conclusie:
-- Ze hebben een welbepaald doel, en welbepaalde eigenschappen. Bigevolg hebben ze in alle waarschijnlijkheid reeds een base class of interface.
+- Ze hebben een welbepaald doel, en welbepaalde eigenschappen. Bijgevolg hebben ze in alle waarschijnlijkheid reeds een base class of interface.
 
 ### Broadway is een CQRS systeem, alles draait om commands en events
 

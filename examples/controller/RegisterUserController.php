@@ -9,18 +9,21 @@ use Milio\User\Domain\Write\Handler\RegisterUserCommandHandler;
 use Milio\User\Domain\Write\Model\UserWriteRepository;
 use Milio\User\Domain\Utils\TestUtils;
 use Milio\User\Domain\Read\Projector\UserReadModelProjector;
+use Broadway\ReadModel\InMemory\InMemoryRepository;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
 //the readmodel projector
-$userReadModelProjector = new UserReadModelprojector();
+$userReadRepository = new InMemoryRepository();
+$userReadModelProjector = new UserReadModelprojector($userReadRepository);
+
 
 //The event store
 $eventStore = new InMemoryEventStore();
 
 //the event bus
 $eventBus = new TraceableEventBus(new SimpleEventBus());
-$eventBus->subscribe(new UserReadModelProjector);
+$eventBus->subscribe($userReadModelProjector);
 
 $repository = new UserWriteRepository($eventStore, $eventBus);
 

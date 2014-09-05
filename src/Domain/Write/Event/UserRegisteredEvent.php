@@ -19,7 +19,7 @@ class UserRegisteredEvent
     private $dateRegistered;
 
     /**
-     * @param \Milio\User\Domain\ValueObjects\UserId    $userId
+     * @param UserId    $userId
      * @param           $username
      * @param           $email
      * @param Password  $password
@@ -59,7 +59,7 @@ class UserRegisteredEvent
     }
 
     /**
-     * @return \Milio\User\Domain\ValueObjects\UserId
+     * @return UserId
      */
     public function getUserId()
     {

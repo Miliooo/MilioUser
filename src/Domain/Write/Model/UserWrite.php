@@ -15,7 +15,7 @@ use Milio\User\Domain\Write\Event\UserRegisteredEvent;
 class UserWrite extends EventSourcedAggregateRoot
 {
     /**
-     * @var \Milio\User\Domain\ValueObjects\UserId
+     * @var UserId
      */
     protected $userId;
 
@@ -45,8 +45,7 @@ class UserWrite extends EventSourcedAggregateRoot
     protected $dateRegistered;
 
     /**
-     *
-     * To consider, do we need this constructor.
+     * Constructor.
      *
      * @param \Milio\User\Domain\ValueObjects\UserId    $userId
      * @param           $username

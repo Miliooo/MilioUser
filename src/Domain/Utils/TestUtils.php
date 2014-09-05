@@ -5,6 +5,7 @@ namespace Milio\User\Domain\Utils;
 use Milio\User\Domain\ValueObjects\Password;
 use Milio\User\Domain\ValueObjects\StringUserId;
 use Milio\User\Domain\Write\Command\RegisterUserCommand;
+use Milio\User\Domain\Write\Event\UserRegisteredEvent;
 
 /**
  * Class TestUtils
@@ -72,6 +73,20 @@ class TestUtils
     public static function getRegisterUserCommand()
     {
         return new RegisterUserCommand(
+            self::getUserId(),
+            self::getUsername(),
+            self::getEmail(),
+            self::getPasswordVO(),
+            self::getDateTime()
+        );
+    }
+
+    /**
+     * @return UserRegisteredEvent
+     */
+    public static function getUserRegisteredEvent()
+    {
+        return new UserRegisteredEvent(
             self::getUserId(),
             self::getUsername(),
             self::getEmail(),

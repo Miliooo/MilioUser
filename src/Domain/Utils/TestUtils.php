@@ -2,6 +2,7 @@
 
 namespace Milio\User\Domain\Utils;
 
+use Milio\User\Domain\ValueObjects\BasicUsername;
 use Milio\User\Domain\ValueObjects\Password;
 use Milio\User\Domain\ValueObjects\StringUserId;
 use Milio\User\Domain\Write\Command\RegisterUserCommand;
@@ -32,13 +33,11 @@ class TestUtils
     }
 
     /**
-     * Gets an string username.
-     *
-     * @return string
+     * @return BasicUsername
      */
     public static function getUsername()
     {
-        return self::USERNAME;
+        return new BasicUsername(self::USERNAME);
     }
 
     /**

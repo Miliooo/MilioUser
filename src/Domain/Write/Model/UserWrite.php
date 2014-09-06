@@ -6,6 +6,7 @@ use Broadway\EventSourcing\EventSourcedAggregateRoot;
 use Milio\User\Domain\ValueObjects\Password;
 use Milio\User\Domain\ValueObjects\UserId;
 use Milio\User\Domain\Write\Event\UserRegisteredEvent;
+use Milio\User\Domain\ValueObjects\Username;
 
 /**
  * Class User
@@ -53,7 +54,7 @@ class UserWrite extends EventSourcedAggregateRoot
      * @param Password  $password
      * @param \DateTime $dateRegistered
      */
-    private function __construct(UserId $userId, $username, $email, Password $password, \DateTime $dateRegistered)
+    private function __construct(UserId $userId, Username $username, $email, Password $password, \DateTime $dateRegistered)
     {
         $this->userId = $userId;
         $this->username = $username;
@@ -71,7 +72,7 @@ class UserWrite extends EventSourcedAggregateRoot
      *
      * @return static
      */
-    public static function registerUser(UserId $userId, $username, $email, $password, \DateTime $dateRegistered)
+    public static function registerUser(UserId $userId, Username $username, $email, $password, \DateTime $dateRegistered)
     {
         $user =  new self($userId, $username, $email, $password, $dateRegistered);
         $user->apply(new UserRegisteredEvent($userId, $username, $email, $password, $dateRegistered));

@@ -4,6 +4,7 @@ namespace Milio\User\Domain\Write\Command;
 
 use Milio\User\Domain\ValueObjects\UserId;
 use Milio\User\Domain\ValueObjects\Password;
+use Milio\User\Domain\ValueObjects\Username;
 
 /**
  * Those properties are public for the moment since we want the form to be able to populate this.
@@ -45,12 +46,12 @@ class RegisterUserCommand
      * Constructor.
      *
      * @param UserId    $userId
-     * @param string    $username
+     * @param Username  $username
      * @param string    $email
      * @param Password  $password
      * @param \DateTime $dateRegistered
      */
-    public function __construct(UserId $userId, $username, $email, Password $password, \DateTime $dateRegistered)
+    public function __construct(UserId $userId, Username $username, $email, Password $password, \DateTime $dateRegistered)
     {
         $this->userId = $userId;
         $this->username= $username;

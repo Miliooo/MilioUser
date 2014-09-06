@@ -2,6 +2,7 @@
 
 namespace Milio\User\Domain\Write\Model;
 
+use Milio\User\Domain\ValueObjects\BasicUsername;
 use Milio\User\Domain\ValueObjects\Password;
 use Milio\User\Domain\ValueObjects\StringUserId;
 
@@ -19,7 +20,7 @@ class UserWriteTest extends \PHPUnit_Framework_TestCase
     {
         $user = UserWrite::registerUser(
             new StringUserId('foo'),
-            'name',
+            new BasicUsername('name'),
             'foo@bar.com',
             new Password('hashed', 'salt', '123'),
             new \DateTime('now')

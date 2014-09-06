@@ -35,7 +35,7 @@ class DoctrineORMRepository implements RepositoryInterface
     }
 
     /**
-     * @param ReadModelInterface $data
+     * {@inheritdoc}
      */
     public function save(ReadModelInterface $data)
     {
@@ -44,9 +44,7 @@ class DoctrineORMRepository implements RepositoryInterface
     }
 
     /**
-     * @param string $id
-     *
-     * @return ReadModelInterface|null
+     * {@inheritdoc}
      */
     public function find($id)
     {
@@ -54,9 +52,7 @@ class DoctrineORMRepository implements RepositoryInterface
     }
 
     /**
-     * @param array $fields
-     *
-     * @return ReadModelInterface[]
+     * {@inheritdoc}
      */
     public function findBy(array $fields)
     {
@@ -64,7 +60,7 @@ class DoctrineORMRepository implements RepositoryInterface
     }
 
     /**
-     * @return ReadModelInterface[]
+     * {@inheritdoc}
      */
     public function findAll()
     {
@@ -72,11 +68,12 @@ class DoctrineORMRepository implements RepositoryInterface
     }
 
     /**
-     * @param string $id
+     * {@inheritdoc}
      */
     public function remove($id)
     {
         $object = $this->repository->find($id);
         $this->entityManager->remove($object);
+        $this->entityManager->flush();
     }
 }

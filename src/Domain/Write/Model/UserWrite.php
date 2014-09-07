@@ -54,7 +54,7 @@ class UserWrite extends EventSourcedAggregateRoot
      */
     private function __construct(UserId $userId, Username $username, $email, Password $password, \DateTime $dateRegistered)
     {
-        $this->userId = $userId;
+        $this->userId = $userId->getUserId();
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;

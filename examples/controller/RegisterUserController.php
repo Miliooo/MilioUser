@@ -14,8 +14,21 @@ use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 use Broadway\Serializer\SimpleInterfaceSerializer;
 use Broadway\EventStore\DBALEventStore;
+use Symfony\Component\Validator\Validation;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 require_once __DIR__ . '/../../bootstrap.php';
+
+//validation
+
+$mappingDir = __DIR__ . '/../../src/Config/Validation/validation.xml';
+
+
+$validator = Validation::createValidatorBuilder()
+    ->addXmlMapping($mappingDir)
+    ->setConstraintValidatorFactory()
+    ->setApiVersion(Validation::API_VERSION_2_5)
+    ->getValidator();
 
 
 //Dbal
@@ -76,7 +89,7 @@ $commandBus->subscribe($commandHandler);
 
 
 
-$controller = new CreateUserController($commandBus);
+$controller = new CreateUserController($commandBus, $validator);
 $controller->updateAction();
 
 /**
@@ -86,14 +99,24 @@ $controller->updateAction();
  */
 class CreateUserController
 {
+    /**
+     * @var Broadway\CommandHandling\CommandBusInterface
+     */
     private $commandBus;
 
     /**
-     * @param CommandBusInterface $commandBus
+     * @var Symfony\Component\Validator\Validator\ValidatorInterface
      */
-    public function __construct(CommandBusInterface $commandBus)
+    private $validator;
+
+    /**
+     * @param CommandBusInterface $commandBus
+     * @param ValidatorInterface  $validator
+     */
+    public function __construct(CommandBusInterface $commandBus, \Symfony\Component\Validator\Validator\ValidatorInterface $validator)
     {
         $this->commandBus = $commandBus;
+        $this->validator = $validator;
     }
 
     /**
@@ -102,11 +125,17 @@ class CreateUserController
     public function updateAction()
     {
         //get the data from the form
-
-        //validate the command object
-
         //send it to the bus
         $command = TestUtils::getRegisterUserCommand();
+
+        //validate the command object
+        $violationList = $this->validator->validate($command);
+        echo (string) $violationList;
+
+        exit('hoi');
+
+
+
         $this->commandBus->dispatch($command);
 
         //when asynchronous need to redirect to other page and do some polling or pray for the best

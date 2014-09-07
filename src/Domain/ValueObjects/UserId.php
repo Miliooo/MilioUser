@@ -10,4 +10,6 @@ namespace Milio\User\Domain\ValueObjects;
 abstract class UserId
 {
     abstract public function __toString();
+
+    abstract public function getUserId();
 }

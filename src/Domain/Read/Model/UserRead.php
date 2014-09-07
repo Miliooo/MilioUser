@@ -22,9 +22,19 @@ class UserRead implements ReadModelInterface
     public $username;
 
     /**
+     * @var string
+     */
+    public $email;
+
+    /**
      * @var string The hashed password
      */
     public $password;
+
+    /**
+     * @var string salt.
+     */
+    public $salt;
 
     /**
      * @var \DateTime
@@ -48,11 +58,27 @@ class UserRead implements ReadModelInterface
     }
 
     /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
      * @return string The password
      */
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSalt()
+    {
+        return $this->salt;
     }
 
     /**

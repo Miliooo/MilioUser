@@ -23,9 +23,17 @@ class StringUserId extends UserId
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function __toString()
+    {
+        return $this->userId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUserId()
     {
         return $this->userId;
     }

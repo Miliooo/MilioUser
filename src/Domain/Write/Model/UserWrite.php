@@ -16,7 +16,7 @@ use Milio\User\Domain\ValueObjects\Username;
 class UserWrite extends EventSourcedAggregateRoot
 {
     /**
-     * @var UserId
+     * @var string
      */
     protected $userId;
 
@@ -36,7 +36,7 @@ class UserWrite extends EventSourcedAggregateRoot
     protected $password;
 
     /**
-     * @var string
+     * @var string The salt
      */
     protected $salt;
 
@@ -46,11 +46,9 @@ class UserWrite extends EventSourcedAggregateRoot
     protected $dateRegistered;
 
     /**
-     * Constructor.
-     *
-     * @param \Milio\User\Domain\ValueObjects\UserId    $userId
-     * @param           $username
-     * @param           $email
+     * @param UserId    $userId
+     * @param Username  $username
+     * @param string    $email
      * @param Password  $password
      * @param \DateTime $dateRegistered
      */
@@ -75,7 +73,14 @@ class UserWrite extends EventSourcedAggregateRoot
     public static function registerUser(UserId $userId, Username $username, $email, $password, \DateTime $dateRegistered)
     {
         $user =  new self($userId, $username, $email, $password, $dateRegistered);
-        $user->apply(new UserRegisteredEvent($userId, $username, $email, $password, $dateRegistered));
+
+        $user->apply(new UserRegisteredEvent(
+            $userId->getUserId(),
+            $username->getUsername(),
+            $email,
+            $password->getHashedPassword(),
+            $password->getSalt(),
+            $dateRegistered));
 
         return $user;
     }
@@ -88,8 +93,8 @@ class UserWrite extends EventSourcedAggregateRoot
         $this->userId = $event->getUserId();
         $this->username = $event->getUsername();
         $this->email = $event->getEmail();
-        $this->password = $event->getPassword()->getHashedPassword();
-        $this->salt = $event->getPassword()->getSalt();
+        $this->password = $event->getPassword();
+        $this->salt = $event->getSalt();
         $this->dateRegistered = $event->getDateRegistered();
     }
 
@@ -98,6 +103,6 @@ class UserWrite extends EventSourcedAggregateRoot
      */
     public function getId()
     {
-        return $this->userId->__toString();
+        return $this->userId;
     }
 }

@@ -8,7 +8,6 @@ use Broadway\EventHandling\EventBusInterface;
 use Broadway\CommandHandling\CommandHandlerInterface;
 use Milio\User\Domain\Write\Handler\RegisterUserCommandHandler;
 use Milio\User\Domain\Utils\TestUtils;
-use Milio\User\Domain\Write\Event\UserRegisteredEvent;
 use Milio\User\Domain\Write\Model\UserWriteEventSourcingRepository;
 
 /**
@@ -24,17 +23,12 @@ class RegisterUserCommandScenarioTestCase extends CommandHandlerScenarioTestCase
     public function it_can_register_new_users()
     {
         $command = TestUtils::getRegisterUserCommand();
+        $event = TestUtils::getUserRegisteredEvent();
 
         $this->scenario
             ->given([])
             ->when($command)
-            ->then([new UserRegisteredEvent(
-                TestUtils::getUserId(),
-                TestUtils::getUsername(),
-                TestUtils::getEmail(),
-                TestUtils::getPasswordVO(),
-                TestUtils::getDateTime()
-            )]);
+            ->then([$event]);
     }
 
     /**

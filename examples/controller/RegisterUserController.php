@@ -9,14 +9,27 @@ use Milio\User\Domain\Write\Handler\RegisterUserCommandHandler;
 use Milio\User\Domain\Write\Model\UserWriteEventSourcingRepository;
 use Milio\User\Domain\Utils\TestUtils;
 use Milio\User\Domain\Read\Projector\UserReadModelProjector;
-use Broadway\ReadModel\InMemory\InMemoryRepository;
 use Milio\User\Domain\Read\Repository\DoctrineORMRepositoryFactory;
+use Doctrine\ORM\Tools\Setup;
+use Doctrine\ORM\EntityManager;
+use Broadway\Serializer\SimpleInterfaceSerializer;
+use Broadway\EventStore\DBALEventStore;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
-use Doctrine\ORM\Tools\Setup;
-use Doctrine\ORM\EntityManager;
 
+//Dbal
+$DbalConfig = new \Doctrine\DBAL\Configuration();
+$connectionParams = [
+    'dbname' => 'user_cqrs',
+    'user' => 'root',
+    'password' => 'root',
+    'driver' => 'pdo_mysql',
+    ];
+$conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $DbalConfig);
+
+
+$dbalEventStore = new DBALEventStore($conn, new SimpleInterfaceSerializer(), new SimpleInterfaceSerializer(), 'milia_user_eventstore');
 // the connection configuration
 $dbParams = [
     'driver' => 'pdo_mysql',
@@ -49,7 +62,7 @@ $eventStore = new InMemoryEventStore();
 $eventBus = new TraceableEventBus(new SimpleEventBus());
 $eventBus->subscribe($userReadModelProjector);
 
-$repository = new UserWriteEventSourcingRepository($eventStore, $eventBus);
+$repository = new UserWriteEventSourcingRepository($dbalEventStore, $eventBus);
 
 //make command handler
 $commandHandler = new RegisterUserCommandHandler($repository);

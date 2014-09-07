@@ -26,7 +26,6 @@ $mappingDir = __DIR__ . '/../../src/Config/Validation/validation.xml';
 
 $validator = Validation::createValidatorBuilder()
     ->addXmlMapping($mappingDir)
-    ->setConstraintValidatorFactory()
     ->setApiVersion(Validation::API_VERSION_2_5)
     ->getValidator();
 
@@ -130,11 +129,11 @@ class CreateUserController
 
         //validate the command object
         $violationList = $this->validator->validate($command);
-        echo (string) $violationList;
-
-        exit('hoi');
-
-
+        if($violationList->count() !== 0) {
+            echo 'command not send, invalid command';
+            echo (string) $violationList;
+            return;
+        }
 
         $this->commandBus->dispatch($command);
 

@@ -39,7 +39,7 @@ class RegisterUserCommandScenarioTestCase extends CommandHandlerScenarioTestCase
      */
     protected function createCommandHandler(EventStoreInterface $eventStore, EventBusInterface $eventBus)
     {
-        $repository = new UserWriteEventSourcingRepository($eventStore, $eventBus);
+        $repository = new UserWriteEventSourcingRepository($eventStore, $eventBus, 'Milio\User\Domain\Write\Model\UserWrite');
 
         return new RegisterUserCommandHandler($repository);
     }

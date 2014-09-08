@@ -16,9 +16,10 @@ class UserWriteEventSourcingRepository extends EventSourcingRepository
     /**
      * @param EventStoreInterface $eventStore
      * @param EventBusInterface   $eventBus
+     * @param string              $aggregateClass
      */
-    public function __construct(EventStoreInterface $eventStore, EventBusInterface $eventBus)
+    public function __construct(EventStoreInterface $eventStore, EventBusInterface $eventBus, $aggregateClass)
     {
-        parent::__construct($eventStore, $eventBus, 'Milio\User\Domain\Write\Model\UserWrite');
+        parent::__construct($eventStore, $eventBus, $aggregateClass);
     }
 }

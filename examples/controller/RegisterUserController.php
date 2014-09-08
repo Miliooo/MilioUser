@@ -77,7 +77,7 @@ $eventBus->subscribe($userReadModelProjector);
 $repository = new UserWriteEventSourcingRepository($dbalEventStore, $eventBus, 'Milio\User\Domain\Write\Model\UserWrite');
 
 //make command handler
-$commandHandler = new RegisterUserCommandHandler($repository);
+$commandHandler = new RegisterUserCommandHandler($repository, 'Milio\User\Domain\Write\Model\UserWrite');
 
 //make command bus
 $commandBus= new SimpleCommandBus();

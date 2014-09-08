@@ -41,6 +41,6 @@ class RegisterUserCommandScenarioTestCase extends CommandHandlerScenarioTestCase
     {
         $repository = new UserWriteEventSourcingRepository($eventStore, $eventBus, 'Milio\User\Domain\Write\Model\UserWrite');
 
-        return new RegisterUserCommandHandler($repository);
+        return new RegisterUserCommandHandler($repository, 'Milio\User\Domain\Write\Model\UserWrite');
     }
 }

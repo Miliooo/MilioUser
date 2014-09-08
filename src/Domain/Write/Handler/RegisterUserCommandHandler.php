@@ -20,11 +20,18 @@ class RegisterUserCommandHandler extends CommandHandler
     private $repository;
 
     /**
-     * @param UserWriteEventSourcingRepository $repository
+     * @var UserWrite
      */
-    public function __construct(UserWriteEventSourcingRepository $repository)
+    private $className;
+
+    /**
+     * @param UserWriteEventSourcingRepository $repository
+     * @param string                           $className
+     */
+    public function __construct(UserWriteEventSourcingRepository $repository, $className)
     {
         $this->repository = $repository;
+        $this->className = $className;
     }
 
     /**
@@ -32,8 +39,9 @@ class RegisterUserCommandHandler extends CommandHandler
      */
     public function handleRegisterUserCommand(RegisterUserCommand $command)
     {
+        $userWrite = $this->className;
         $aggregate =
-            UserWrite::registerUser(
+            $userWrite::registerUser(
             $command->userId,
             $command->username,
             $command->email,

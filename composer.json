@@ -1,17 +1,20 @@
 {
-    "name": "milio/user-cqrs",
-    "description": "user events CQRS",
+    "name": "milio/user",
+    "type": "library",
+    "description": "User CQRS Event Sourcing",
+    "keywords": ["user", "user management"],
+    "homepage": "https://github.com/Miliooo/MilioUser",
     "license": "MIT",
     "authors": [
         {
-            "name": "michiel Boeckaert",
+            "name": "Michiel Boeckaert",
             "email": "Boeckaert@gmail.com"
         }
     ],
     "minimum-stability": "dev",
     "require": {
         "broadway/broadway": "0.2.*@dev",
-        "doctrine/orm": ">=2.4",
+        "doctrine/orm": "~2.4",
         "doctrine/dbal": "~2.4",
         "symfony/validator": "~2.5"
     },

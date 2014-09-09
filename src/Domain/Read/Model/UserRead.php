@@ -47,7 +47,7 @@ class UserRead implements ReadModelInterface
     public $dateRegistered;
 
     /**
-     * @var string (space seperated string with the roles the user has.)
+     * @var string (space separated string with the roles the user has.)
      */
     public $roles;
 

@@ -34,7 +34,7 @@ class UsernameTest extends \PHPUnit_Framework_TestCase
      *
      * @dataProvider minLengthProvider
      */
-    public function it_should_have_at_least_three_characters($username)
+    public function it_should_have_at_least_two_characters($username)
     {
         $this->setExpectedException('Milio\User\Domain\ValueObjects\Exceptions\UsernameException');
         $this->getUsernameObject($username);
@@ -80,9 +80,9 @@ class UsernameTest extends \PHPUnit_Framework_TestCase
     public function minLengthProvider()
     {
         return [
-            ['ee'],
-            ['&é'],
-            ['@@'],
+            ['e'],
+            ['&'],
+            ['@'],
         ];
     }
 }

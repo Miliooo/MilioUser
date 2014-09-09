@@ -56,8 +56,8 @@ abstract class Username
     {
         $length = $this->getLength($username);
 
-        if ($length < 3) {
-            throw new UsernameException('at least 3 characters');
+        if ($length < 2) {
+            throw new UsernameException('at least 2 characters');
         }
     }
 
@@ -71,7 +71,7 @@ abstract class Username
         $length = $this->getLength($username);
 
         if($length > 25) {
-            throw new UsernameException('max 25 charactes');
+            throw new UsernameException('max 25 characters');
         }
     }
 

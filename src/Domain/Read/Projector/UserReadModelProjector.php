@@ -39,7 +39,7 @@ class UserReadModelProjector extends Projector
     public function applyUserRegisteredEvent(UserRegisteredEvent $event, DomainMessageInterface $domainMessage)
     {
         $model = new UserRead();
-        $model->id = (string) $event->getUserId();
+        $model->userId = (string) $event->getUserId();
         $model->username = $event->getUsername();
         $model->email = $event->getEmail();
         $model->password = $event->getPassword();

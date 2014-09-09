@@ -21,7 +21,7 @@ class UserReadModelProjectorTestCase extends ProjectorScenarioTestCase
     {
         $userRegisteredEvent = TestUtils::getUserRegisteredEvent();
         $expectedUserModel = new UserRead();
-        $expectedUserModel->id = (string) TestUtils::getUserId();
+        $expectedUserModel->userId = (string) TestUtils::getUserId();
         $expectedUserModel->username = TestUtils::getUsername();
         $expectedUserModel->email = TestUtils::getEmail();
         $expectedUserModel->dateRegistered = TestUtils::getDateTime();

@@ -19,6 +19,11 @@ class UserRead implements ReadModelInterface
     /**
      * @var string
      */
+    public $userId;
+
+    /**
+     * @var string
+     */
     public $username;
 
     /**

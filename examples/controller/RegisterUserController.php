@@ -64,7 +64,7 @@ $isDevMode = false;
 $repositoryFactory = new DoctrineORMRepositoryFactory($entityManager);
 $userReadRepository = $repositoryFactory->create('user', 'Milio\User\Domain\Read\Model\UserRead');
 
-$userReadModelProjector = new UserReadModelprojector($userReadRepository);
+$userReadModelProjector = new UserReadModelprojector($userReadRepository, 'Milio\User\Domain\Read\Model\UserRead');
 
 
 //The event store
@@ -84,10 +84,6 @@ $commandBus= new SimpleCommandBus();
 $commandBus->subscribe($commandHandler);
 
 //doctrine
-
-
-
-
 $controller = new CreateUserController($commandBus, $validator);
 $controller->updateAction();
 

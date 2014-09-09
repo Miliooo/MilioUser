@@ -38,6 +38,6 @@ class UserReadModelProjectorTestCase extends ProjectorScenarioTestCase
      */
     protected function createProjector(InMemoryRepository $repository)
     {
-        return new UserReadModelProjector($repository);
+        return new UserReadModelProjector($repository, 'Milio\User\Domain\Read\Model\UserRead');
     }
 }

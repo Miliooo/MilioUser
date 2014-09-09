@@ -17,16 +17,18 @@ class UserRegisteredEvent implements SerializableInterface
     private $password;
     private $salt;
     private $dateRegistered;
+    private $roles = [];
 
     /**
-     * @param string    $userId   String UserId
-     * @param string    $username String username
-     * @param string    $email    String email
-     * @param string    $password String password
-     * @param string    $salt     String salt
+     * @param string    $userId         String UserId
+     * @param string    $username       String username
+     * @param string    $email          String email
+     * @param string    $password       String password
+     * @param string    $salt           String salt
      * @param \DateTime $dateRegistered \DateTime
+     * @param array     $roles          The roles the user has.
      */
-    public function __construct($userId, $username, $email, $password, $salt, \DateTime $dateRegistered)
+    public function __construct($userId, $username, $email, $password, $salt, \DateTime $dateRegistered, array $roles)
     {
         $this->userId = $userId;
         $this->username = $username;
@@ -34,6 +36,7 @@ class UserRegisteredEvent implements SerializableInterface
         $this->password = $password;
         $this->salt = $salt;
         $this->dateRegistered = $dateRegistered;
+        $this->roles = $roles;
     }
 
     /**
@@ -85,6 +88,16 @@ class UserRegisteredEvent implements SerializableInterface
     }
 
     /**
+     * Gets the roles the user has when he's registered.
+     *
+     * @return array
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    /**
      * @return string
      */
     public function __toString()
@@ -97,7 +110,15 @@ class UserRegisteredEvent implements SerializableInterface
      */
     public static function deserialize(array $data)
     {
-        return new self($data['userId'], $data['username'], $data['email'], $data['password'], $data['salt'], $data['dateRegistered']);
+        return new self(
+            $data['userId'],
+            $data['username'],
+            $data['email'],
+            $data['password'],
+            $data['salt'],
+            $data['dateRegistered'],
+            $data['roles']
+        );
     }
 
     /**
@@ -111,7 +132,8 @@ class UserRegisteredEvent implements SerializableInterface
             'email' => $this->email,
             'password' => $this->password,
             'salt' => $this->salt,
-            'dateRegistered' => $this->dateRegistered
+            'dateRegistered' => $this->dateRegistered,
+            'roles' => $this->roles
         ];
     }
 }

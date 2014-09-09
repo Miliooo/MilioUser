@@ -21,6 +21,7 @@ class TestUtils
     CONST PASSWORD_SALT = 'this_is_the_salt';
     const EMAIL = 'foo@bar.com';
     const DATE_TIME = '10-10-2011 00:00:00';
+    const ROLE_SIGNUP = 'ROLE_USER';
 
     /**
      * @return string
@@ -107,7 +108,8 @@ class TestUtils
             self::getEmail(),
             self::getPassword(),
             self::getSalt(),
-            self::getDateTime()
+            self::getDateTime(),
+            [self::ROLE_SIGNUP]
         );
     }
 }

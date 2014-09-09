@@ -52,6 +52,8 @@ class UserReadModelProjector extends Projector
         $model->password = $event->getPassword();
         $model->salt = $event->getSalt();
         $model->dateRegistered = $event->getDateRegistered();
+        $model->roles = implode(' ', $event->getRoles());
+
         $this->repository->save($model);
     }
 }

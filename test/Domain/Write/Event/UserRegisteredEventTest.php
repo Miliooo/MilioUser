@@ -22,7 +22,8 @@ class UserRegisteredEventTest extends SerializableEventTestCase
             'user_foo@foo.bar',
             'secretpass',
             'my_hash',
-            new \DateTime('now')
+            new \DateTime('now'),
+            ['ROLE_USER']
         );
     }
 }

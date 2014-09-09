@@ -27,6 +27,7 @@ class UserReadModelProjectorTestCase extends ProjectorScenarioTestCase
         $expectedUserModel->dateRegistered = TestUtils::getDateTime();
         $expectedUserModel->password = TestUtils::getPassword();
         $expectedUserModel->salt = TestUtils::getSalt();
+        $expectedUserModel->roles = TestUtils::ROLE_SIGNUP;
 
         $this->scenario->given([$userRegisteredEvent])
             ->when($userRegisteredEvent)

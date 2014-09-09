@@ -90,7 +90,9 @@ class UserWrite extends EventSourcedAggregateRoot
             $email,
             $password->getHashedPassword(),
             $password->getSalt(),
-            $dateRegistered));
+            $dateRegistered,
+            [static::DEFAULT_ROLE]
+            ));
 
         return $user;
     }

@@ -15,6 +15,8 @@ use Milio\User\Domain\ValueObjects\Username;
  */
 class UserWrite extends EventSourcedAggregateRoot
 {
+    CONST DEFAULT_ROLE = "ROLE_USER";
+
     /**
      * @var string
      */
@@ -46,33 +48,41 @@ class UserWrite extends EventSourcedAggregateRoot
     protected $dateRegistered;
 
     /**
-     * @param UserId    $userId
-     * @param Username  $username
-     * @param string    $email
-     * @param Password  $password
-     * @param \DateTime $dateRegistered
+     * @var array
      */
-    private function __construct(UserId $userId, Username $username, $email, Password $password, \DateTime $dateRegistered)
-    {
-        $this->userId = $userId->getUserId();
-        $this->username = $username;
-        $this->email = $email;
-        $this->password = $password;
-        $this->dateRegistered = $dateRegistered;
-    }
+    protected $roles = [];
 
     /**
-     * @param           $userId
-     * @param           $username
+     * @param UserId    $userId
+     * @param Username  $username
      * @param           $email
      * @param Password  $password
      * @param \DateTime $dateRegistered
-     *
-     * @return static
+     * @param string   $role
      */
-    public static function registerUser(UserId $userId, Username $username, $email, $password, \DateTime $dateRegistered)
+    private function __construct(UserId $userId, Username $username, $email, Password $password, \DateTime $dateRegistered, $role)
     {
-        $user =  new self($userId, $username, $email, $password, $dateRegistered);
+        $this->userId = $userId->getUserId();
+        $this->username = $username->getUsername();
+        $this->email = $email;
+        $this->password = $password->getHashedPassword();
+        $this->salt = $password->getSalt();
+        $this->dateRegistered = $dateRegistered;
+        $this->roles = [$role];
+    }
+
+    /**
+     * @param UserId    $userId         The user id value object
+     * @param Username  $username       The username value object (guards invalid names)
+     * @param string    $email          The email
+     * @param password  $password       The password value object
+     * @param \DateTime $dateRegistered The date the user was registered
+     *
+     * @return self
+     */
+    public static function registerUser(UserId $userId, Username $username, $email, password $password, \DateTime $dateRegistered)
+    {
+        $user =  new self($userId, $username, $email, $password, $dateRegistered, static::DEFAULT_ROLE);
 
         $user->apply(new UserRegisteredEvent(
             $userId->getUserId(),
@@ -96,6 +106,7 @@ class UserWrite extends EventSourcedAggregateRoot
         $this->password = $event->getPassword();
         $this->salt = $event->getSalt();
         $this->dateRegistered = $event->getDateRegistered();
+        $this->roles = static::DEFAULT_ROLE;
     }
 
     /**

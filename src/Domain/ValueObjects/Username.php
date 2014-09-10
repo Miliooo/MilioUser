@@ -27,7 +27,6 @@ abstract class Username
         $username = trim($username);
         $this->guardMinLength($username);
         $this->guardMaxLength($username);
-
         $this->username = $username;
     }
 

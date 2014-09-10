@@ -5,7 +5,7 @@ use Broadway\EventHandling\TraceableEventBus;
 use Broadway\EventStore\InMemoryEventStore;
 use Broadway\CommandHandling\SimpleCommandBus;
 use Broadway\CommandHandling\CommandBusInterface;
-use Milio\User\Domain\Write\Handler\RegisterUserCommandHandler;
+use Milio\User\Domain\Write\Handler\SecurityUserCommandHandler;
 use Milio\User\Domain\Write\Model\UserWriteEventSourcingRepository;
 use Milio\User\Domain\Utils\TestUtils;
 use Milio\User\Domain\Read\Projector\UserReadModelProjector;
@@ -77,7 +77,7 @@ $eventBus->subscribe($userReadModelProjector);
 $repository = new UserWriteEventSourcingRepository($dbalEventStore, $eventBus, 'Milio\User\Domain\Write\Model\UserWrite');
 
 //make command handler
-$commandHandler = new RegisterUserCommandHandler($repository, 'Milio\User\Domain\Write\Model\UserWrite');
+$commandHandler = new SecurityUserCommandHandler($repository, 'Milio\User\Domain\Write\Model\UserWrite');
 
 //make command bus
 $commandBus= new SimpleCommandBus();

@@ -7,7 +7,7 @@ use Milio\User\Domain\ValueObjects\Password;
 use Milio\User\Domain\ValueObjects\StringUserId;
 use Milio\User\Domain\Write\Command\RegisterUserCommand;
 use Milio\User\Domain\Write\Event\UserRegisteredEvent;
-
+use Milio\User\Domain\ValueObjects\UserId;
 /**
  * Class TestUtils
  *
@@ -24,7 +24,7 @@ class TestUtils
     const ROLE_SIGNUP = 'ROLE_USER';
 
     /**
-     * @return string
+     * @return UserId
      */
     public static function getUserId()
     {
@@ -103,7 +103,7 @@ class TestUtils
     public static function getUserRegisteredEvent()
     {
         return new UserRegisteredEvent(
-            self::getUserId(),
+            self::getUserId()->getUserId(),
             self::getUsername(),
             self::getEmail(),
             self::getPassword(),

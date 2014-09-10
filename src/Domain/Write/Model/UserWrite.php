@@ -7,6 +7,8 @@ use Milio\User\Domain\ValueObjects\Password;
 use Milio\User\Domain\ValueObjects\UserId;
 use Milio\User\Domain\Write\Event\UserRegisteredEvent;
 use Milio\User\Domain\ValueObjects\Username;
+use Milio\User\Domain\Write\Event\UsernameChangedEvent;
+use Milio\User\Domain\ValueObjects\StringUserId;
 
 /**
  * Class User
@@ -53,25 +55,6 @@ class UserWrite extends EventSourcedAggregateRoot
     protected $roles = [];
 
     /**
-     * @param UserId    $userId
-     * @param Username  $username
-     * @param           $email
-     * @param Password  $password
-     * @param \DateTime $dateRegistered
-     * @param string   $role
-     */
-    private function __construct(UserId $userId, Username $username, $email, Password $password, \DateTime $dateRegistered, $role)
-    {
-        $this->userId = $userId->getUserId();
-        $this->username = $username->getUsername();
-        $this->email = $email;
-        $this->password = $password->getHashedPassword();
-        $this->salt = $password->getSalt();
-        $this->dateRegistered = $dateRegistered;
-        $this->roles = [$role];
-    }
-
-    /**
      * @param UserId    $userId         The user id value object
      * @param Username  $username       The username value object (guards invalid names)
      * @param string    $email          The email
@@ -82,7 +65,7 @@ class UserWrite extends EventSourcedAggregateRoot
      */
     public static function registerUser(UserId $userId, Username $username, $email, password $password, \DateTime $dateRegistered)
     {
-        $user =  new self($userId, $username, $email, $password, $dateRegistered, static::DEFAULT_ROLE);
+        $user =  new self();
 
         $user->apply(new UserRegisteredEvent(
             $userId->getUserId(),
@@ -95,6 +78,26 @@ class UserWrite extends EventSourcedAggregateRoot
             ));
 
         return $user;
+    }
+
+    /**
+     * @param Username $username
+     */
+    public function changeUsername(Username $username)
+    {
+        if ($username->getUsername() === $username) {
+            return;
+        }
+
+        $this->apply(new UsernameChangedEvent(new StringUserId($this->userId), $this->username, $username->getUsername()));
+    }
+
+    /**
+     * @param UsernameChangedEvent $event
+     */
+    public function applyUserNameChangedEvent(UsernameChangedEvent $event)
+    {
+        $this->username = $event->getUpdatedUsername();
     }
 
     /**

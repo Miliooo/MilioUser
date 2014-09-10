@@ -8,7 +8,7 @@ use Broadway\CommandHandling\CommandBusInterface;
 use Milio\User\Domain\Write\Handler\SecurityUserCommandHandler;
 use Milio\User\Domain\Write\Model\UserWriteEventSourcingRepository;
 use Milio\User\Domain\Utils\TestUtils;
-use Milio\User\Domain\Read\Projector\UserReadModelProjector;
+use Milio\User\Domain\Read\Projector\ViewUserSecurityModelProjector;
 use Milio\User\Domain\Read\Repository\DoctrineORMRepositoryFactory;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
@@ -60,11 +60,11 @@ $isDevMode = false;
 
 
 //the readmodel projector
-//$userReadRepository = new DoctrineORMRepository($entityManager, 'Milio\User\Domain\Read\Model\UserRead');
+//$userReadRepository = new DoctrineORMRepository($entityManager, 'Milio\User\Domain\Read\Model\ViewUserSecurity');
 $repositoryFactory = new DoctrineORMRepositoryFactory($entityManager);
-$userReadRepository = $repositoryFactory->create('user', 'Milio\User\Domain\Read\Model\UserRead');
+$userReadRepository = $repositoryFactory->create('user', 'Milio\User\Domain\Read\Model\ViewUserSecurity');
 
-$userReadModelProjector = new UserReadModelprojector($userReadRepository, 'Milio\User\Domain\Read\Model\UserRead');
+$userReadModelProjector = new ViewUserSecurityModelProjector($userReadRepository, 'Milio\User\Domain\Read\Model\UserSecurity');
 
 
 //The event store
@@ -74,10 +74,10 @@ $eventStore = new InMemoryEventStore();
 $eventBus = new TraceableEventBus(new SimpleEventBus());
 $eventBus->subscribe($userReadModelProjector);
 
-$repository = new UserWriteEventSourcingRepository($dbalEventStore, $eventBus, 'Milio\User\Domain\Write\Model\UserWrite');
+$repository = new UserWriteEventSourcingRepository($dbalEventStore, $eventBus, 'Milio\User\Domain\Write\Model\UserSecurity');
 
 //make command handler
-$commandHandler = new SecurityUserCommandHandler($repository, 'Milio\User\Domain\Write\Model\UserWrite');
+$commandHandler = new SecurityUserCommandHandler($repository, 'Milio\User\Domain\Write\Model\UserSecurity');
 
 //make command bus
 $commandBus= new SimpleCommandBus();

@@ -12,7 +12,7 @@ use Milio\User\Domain\Write\Event\UserRegisteredEvent;
  *
  * @author Michiel Boeckaert <boeckaert@gmail.com>
  */
-class UserReadModelProjector extends Projector
+class ViewUserSecurityModelProjector extends Projector
 {
     /**
      * @var RepositoryInterface

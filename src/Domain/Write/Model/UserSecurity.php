@@ -11,11 +11,11 @@ use Milio\User\Domain\Write\Event\UsernameChangedEvent;
 use Milio\User\Domain\ValueObjects\StringUserId;
 
 /**
- * Class User
+ * The user security model is used for logging in users. For giving them more or less rights.
  *
  * @author Michiel Boeckaert <boeckaert@gmail.com>
  */
-class UserWrite extends EventSourcedAggregateRoot
+class UserSecurity extends EventSourcedAggregateRoot
 {
     CONST DEFAULT_ROLE = "ROLE_USER";
 
@@ -50,6 +50,16 @@ class UserWrite extends EventSourcedAggregateRoot
     protected $dateRegistered;
 
     /**
+     * @var bool
+     */
+    protected $isDeleted = false;
+
+    /**
+     * @var bool
+     */
+    protected $isBanned = false;
+
+    /**
      * @var array
      */
     protected $roles = [];
@@ -61,7 +71,7 @@ class UserWrite extends EventSourcedAggregateRoot
      * @param password  $password       The password value object
      * @param \DateTime $dateRegistered The date the user was registered
      *
-     * @return self
+     * @return UserSecurity
      */
     public static function registerUser(UserId $userId, Username $username, $email, password $password, \DateTime $dateRegistered)
     {

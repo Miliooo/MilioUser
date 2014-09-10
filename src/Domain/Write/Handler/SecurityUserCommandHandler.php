@@ -6,7 +6,7 @@ use Broadway\CommandHandling\CommandHandler;
 use Milio\User\Domain\Write\Command\ChangeUsernameCommand;
 use Milio\User\Domain\Write\Command\RegisterUserCommand;
 use Milio\User\Domain\Write\Model\UserWriteEventSourcingRepository;
-use Milio\User\Domain\Write\Model\UserWrite;
+use Milio\User\Domain\Write\Model\UserSecurity;
 
 /**
  * Class SecurityUserCommandHandler
@@ -21,7 +21,7 @@ class SecurityUserCommandHandler extends CommandHandler
     private $repository;
 
     /**
-     * @var UserWrite
+     * @var UserSecurity
      */
     private $className;
 
@@ -58,7 +58,7 @@ class SecurityUserCommandHandler extends CommandHandler
      */
     public function handleChangeUsernameCommand(ChangeUsernameCommand $command)
     {
-        /** @var UserWrite $aggregate */
+        /** @var UserSecurity $aggregate */
         $aggregate = $this->repository->load($command->userId->getUserId());
         $aggregate->changeUsername($command->username);
         $this->repository->add($aggregate);

@@ -11,14 +11,14 @@ use Milio\User\Domain\ValueObjects\StringUserId;
  *
  * @author Michiel Boeckaert <boeckaert@gmail.com>
  */
-class UserWriteTest extends \PHPUnit_Framework_TestCase
+class UserSecurityTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
      */
     public function it_should_set_attributes_and_return_self()
     {
-        $user = UserWrite::registerUser(
+        $user = UserSecurity::registerUser(
             new StringUserId('foo'),
             new BasicUsername('name'),
             'foo@bar.com',
@@ -26,7 +26,7 @@ class UserWriteTest extends \PHPUnit_Framework_TestCase
             new \DateTime('now')
         );
 
-        $this->assertInstanceOf('Milio\User\Domain\Write\Model\UserWrite', $user);
+        $this->assertInstanceOf('Milio\User\Domain\Write\Model\UserSecurity', $user);
         $this->assertAttributeEquals('name', 'username', $user);
         $this->assertAttributeEquals('hashed', 'password', $user);
     }

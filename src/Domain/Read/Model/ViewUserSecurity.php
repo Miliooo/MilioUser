@@ -9,13 +9,8 @@ use Broadway\ReadModel\ReadModelInterface;
  *
  * @author Michiel Boeckaert <boeckaert@gmail.com>
  */
-class UserRead implements ReadModelInterface
+class ViewUserSecurity implements ReadModelInterface
 {
-    /**
-     * @var string
-     */
-    public $id;
-
     /**
      * @var string
      */
@@ -56,7 +51,7 @@ class UserRead implements ReadModelInterface
      */
     public function getId()
     {
-        return $this->id;
+        return $this->userId;
     }
 
     /**

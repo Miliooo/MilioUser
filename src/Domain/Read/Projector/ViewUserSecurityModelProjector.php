@@ -6,6 +6,7 @@ use Broadway\ReadModel\Projector;
 use Broadway\Domain\DomainMessageInterface;
 use Broadway\ReadModel\RepositoryInterface;
 use Milio\User\Domain\Write\Event\UserRegisteredEvent;
+use Milio\User\Domain\Write\Event\UsernameChangedEvent;
 
 /**
  * The user read model projector is responsible for applying the events to the read model.
@@ -53,6 +54,18 @@ class ViewUserSecurityModelProjector extends Projector
         $model->salt = $event->getSalt();
         $model->dateRegistered = $event->getDateRegistered();
         $model->roles = implode(' ', $event->getRoles());
+
+        $this->repository->save($model);
+    }
+
+    /**
+     * @param UsernameChangedEvent   $event
+     * @param DomainMessageInterface $domainMessage
+     */
+    public function applyUsernameChangedEvent(UsernameChangedEvent $event, DomainMessageInterface $domainMessage)
+    {
+        $model = $this->repository->find($event->getUserId());
+        $model->username = $event->getUpdatedUsername();
 
         $this->repository->save($model);
     }

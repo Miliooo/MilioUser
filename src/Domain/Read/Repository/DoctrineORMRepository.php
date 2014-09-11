@@ -48,7 +48,7 @@ class DoctrineORMRepository implements RepositoryInterface
      */
     public function find($id)
     {
-        return $this->repository->find($id);
+        return $this->repository->findOneBy(['userId' => $id]);
     }
 
     /**

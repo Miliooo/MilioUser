@@ -144,7 +144,7 @@ class CreateUserController
     {
         $command = new \Milio\User\Domain\Write\Command\ChangeUsernameCommand(
             StringUserId::generate(TestUtils::USER_ID),
-            new BasicUsername('updatedss_username')
+            new BasicUsername('updated_username_2')
         );
 
         $this->commandBus->dispatch($command);

@@ -103,11 +103,11 @@ class TestUtils
     public static function getUserRegisteredEvent()
     {
         return new UserRegisteredEvent(
-            self::getUserId()->getUserId(),
-            self::getUsername(),
+            self::USER_ID,
+            self::USERNAME,
             self::getEmail(),
-            self::getPassword(),
-            self::getSalt(),
+            self::PASSWORD_HASH,
+            self::PASSWORD_SALT,
             self::getDateTime(),
             [self::ROLE_SIGNUP]
         );

@@ -42,6 +42,11 @@ class ViewUserSecurity implements ReadModelInterface
     public $salt;
 
     /**
+     * @var bool
+     */
+    public $isDeleted = false;
+
+    /**
      * @var \DateTime
      */
     public $dateRegistered;
@@ -56,7 +61,7 @@ class ViewUserSecurity implements ReadModelInterface
      */
     public function getId()
     {
-        return $this->userId;
+        return (string) $this->userId;
     }
 
     /**

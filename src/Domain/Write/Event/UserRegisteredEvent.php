@@ -110,6 +110,8 @@ class UserRegisteredEvent implements SerializableInterface
      */
     public static function deserialize(array $data)
     {
+        $date = new \DateTime();
+        $dateTimeFromTimestamp = $date->setTimestamp($data['date_registered']);
 
         return new self(
             $data['userId'],
@@ -117,7 +119,7 @@ class UserRegisteredEvent implements SerializableInterface
             $data['email'],
             $data['password'],
             $data['salt'],
-            new \DateTime($data['dateRegistered']['date']),
+            $dateTimeFromTimestamp,
             $data['roles']
         );
     }
@@ -133,7 +135,7 @@ class UserRegisteredEvent implements SerializableInterface
             'email' => $this->email,
             'password' => $this->password,
             'salt' => $this->salt,
-            'dateRegistered' => $this->dateRegistered,
+            'date_registered' => $this->dateRegistered->getTimestamp(),
             'roles' => $this->roles
         ];
     }

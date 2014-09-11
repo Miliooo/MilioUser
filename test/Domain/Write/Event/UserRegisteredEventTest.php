@@ -3,7 +3,7 @@
 namespace Milio\User\Domain\Write\Event;
 
 use Broadway\Serializer\Testing\SerializableEventTestCase;
-
+use Milio\User\Domain\Utils\TestUtils;
 /**
  * Class UserRegisteredEventTest
  *
@@ -22,7 +22,7 @@ class UserRegisteredEventTest extends SerializableEventTestCase
             'user_foo@foo.bar',
             'secretpass',
             'my_hash',
-            new \DateTime('now'),
+            new \DateTime(TestUtils::DATE_TIME),
             ['ROLE_USER']
         );
     }

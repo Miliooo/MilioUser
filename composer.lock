@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2288747041a2ce9765ea1f2561d2f006",
+    "hash": "1f040de238d4cfb3eb3234fc726ba857",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -53,12 +53,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/qandidate-labs/broadway.git",
-                "reference": "865d7b218bd72f376c27fe6d4805034f8e5f5e15"
+                "reference": "d335021dca589f7e4c0f7c7c51ddc5ebd822b759"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/qandidate-labs/broadway/zipball/865d7b218bd72f376c27fe6d4805034f8e5f5e15",
-                "reference": "865d7b218bd72f376c27fe6d4805034f8e5f5e15",
+                "url": "https://api.github.com/repos/qandidate-labs/broadway/zipball/d335021dca589f7e4c0f7c7c51ddc5ebd822b759",
+                "reference": "d335021dca589f7e4c0f7c7c51ddc5ebd822b759",
                 "shasum": ""
             },
             "require": {
@@ -131,7 +131,7 @@
                 "domain-driven design",
                 "event sourcing"
             ],
-            "time": "2014-09-04 11:32:19"
+            "time": "2014-09-11 08:37:19"
         },
         {
             "name": "doctrine/annotations",
@@ -420,12 +420,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "85fd6247cbec0bd4d7904c2e99087c88c1c1c2a2"
+                "reference": "c8b58d97e856abb5b9d08cca3997a265b0c254da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/85fd6247cbec0bd4d7904c2e99087c88c1c1c2a2",
-                "reference": "85fd6247cbec0bd4d7904c2e99087c88c1c1c2a2",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/c8b58d97e856abb5b9d08cca3997a265b0c254da",
+                "reference": "c8b58d97e856abb5b9d08cca3997a265b0c254da",
                 "shasum": ""
             },
             "require": {
@@ -483,7 +483,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2014-09-03 17:29:21"
+            "time": "2014-09-10 17:36:07"
         },
         {
             "name": "doctrine/inflector",
@@ -617,12 +617,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/lexer.git",
-                "reference": "db77c80d33d72e33a62b80581e9d150af85de556"
+                "reference": "83893c552fd2045dd78aef794c31e694c37c0b8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/lexer/zipball/db77c80d33d72e33a62b80581e9d150af85de556",
-                "reference": "db77c80d33d72e33a62b80581e9d150af85de556",
+                "url": "https://api.github.com/repos/doctrine/lexer/zipball/83893c552fd2045dd78aef794c31e694c37c0b8c",
+                "reference": "83893c552fd2045dd78aef794c31e694c37c0b8c",
                 "shasum": ""
             },
             "require": {
@@ -645,19 +645,16 @@
             ],
             "authors": [
                 {
-                    "name": "Guilherme Blanco",
-                    "email": "guilhermeblanco@gmail.com",
-                    "homepage": "http://www.instaclick.com"
-                },
-                {
                     "name": "Roman Borschel",
                     "email": "roman@code-factory.org"
                 },
                 {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com"
+                },
+                {
                     "name": "Johannes Schmitt",
-                    "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
-                    "role": "Developer of wrapped JMSSerializerBundle"
+                    "email": "schmittjoh@gmail.com"
                 }
             ],
             "description": "Base library for a lexer that can be used in Top-Down, Recursive Descent Parsers.",
@@ -666,7 +663,7 @@
                 "lexer",
                 "parser"
             ],
-            "time": "2014-06-11 23:09:27"
+            "time": "2014-09-09 13:34:57"
         },
         {
             "name": "doctrine/orm",
@@ -674,12 +671,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "d9b43dc6492b163fc46f40c0555e2a7015ef5b68"
+                "reference": "b249aa9f652efdd36992ea542ccbd8e82f1b75be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/d9b43dc6492b163fc46f40c0555e2a7015ef5b68",
-                "reference": "d9b43dc6492b163fc46f40c0555e2a7015ef5b68",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/b249aa9f652efdd36992ea542ccbd8e82f1b75be",
+                "reference": "b249aa9f652efdd36992ea542ccbd8e82f1b75be",
                 "shasum": ""
             },
             "require": {
@@ -741,7 +738,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2014-08-30 02:22:47"
+            "time": "2014-09-10 16:27:51"
         },
         {
             "name": "rhumsaa/uuid",

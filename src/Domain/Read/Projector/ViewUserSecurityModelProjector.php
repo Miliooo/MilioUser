@@ -7,6 +7,7 @@ use Broadway\Domain\DomainMessageInterface;
 use Broadway\ReadModel\RepositoryInterface;
 use Milio\User\Domain\Write\Event\UserRegisteredEvent;
 use Milio\User\Domain\Write\Event\UsernameChangedEvent;
+use Milio\User\Domain\Write\Event\UserDeletedEvent;
 
 /**
  * The user read model projector is responsible for applying the events to the read model.
@@ -66,6 +67,18 @@ class ViewUserSecurityModelProjector extends Projector
     {
         $model = $this->repository->find($event->getUserId());
         $model->username = $event->getUpdatedUsername();
+
+        $this->repository->save($model);
+    }
+
+    /**
+     * @param UserDeletedEvent       $event
+     * @param DomainMessageInterface $domainMessage
+     */
+    public function applyUserDeletedEvent(UserDeletedEvent $event, DomainMessageInterface $domainMessage)
+    {
+        $model = $this->repository->find($event->userId);
+        $model->isDeleted = true;
 
         $this->repository->save($model);
     }

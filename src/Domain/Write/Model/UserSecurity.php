@@ -8,6 +8,7 @@ use Milio\User\Domain\ValueObjects\UserId;
 use Milio\User\Domain\Write\Event\UserRegisteredEvent;
 use Milio\User\Domain\ValueObjects\Username;
 use Milio\User\Domain\Write\Event\UsernameChangedEvent;
+use Milio\User\Domain\Write\Event\UserDeletedEvent;
 
 /**
  * The user security model is used for logging in users. For giving them more or less rights.
@@ -99,6 +100,26 @@ class UserSecurity extends EventSourcedAggregateRoot
         }
 
         $this->apply(new UsernameChangedEvent($this->userId, $this->username, $username->getUsername()));
+    }
+
+    /**
+     * @param UserId $userId
+     */
+    public function deleteUser(UserId $userId)
+    {
+        if ($this->isDeleted) {
+            return;
+        }
+
+        $this->apply(new UserDeletedEvent($userId));
+    }
+
+    /**
+     * @param UserDeletedEvent $event
+     */
+    public function applyUserDeletedEvent(UserDeletedEvent $event)
+    {
+        $this->isDeleted = true;
     }
 
     /**

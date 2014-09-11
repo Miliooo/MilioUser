@@ -16,5 +16,6 @@
         <field name="salt" column="salt" type="string" length="50"/>
         <field name="roles" column="roles" type="string" length="255"/>
         <field name="dateRegistered" column="date_registered" type="datetime"/>
+        <field name="isDeleted" column="is_deleted" type="boolean" />
     </entity>
 </doctrine-mapping>

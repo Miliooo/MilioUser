@@ -16,6 +16,8 @@ use Broadway\Serializer\SimpleInterfaceSerializer;
 use Broadway\EventStore\DBALEventStore;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Milio\User\Domain\ValueObjects\StringUserId;
+use Milio\User\Domain\ValueObjects\BasicUsername;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
@@ -64,7 +66,7 @@ $isDevMode = false;
 $repositoryFactory = new DoctrineORMRepositoryFactory($entityManager);
 $userReadRepository = $repositoryFactory->create('user', 'Milio\User\Domain\Read\Model\ViewUserSecurity');
 
-$userReadModelProjector = new ViewUserSecurityModelProjector($userReadRepository, 'Milio\User\Domain\Read\Model\UserSecurity');
+$userReadModelProjector = new ViewUserSecurityModelProjector($userReadRepository, 'Milio\User\Domain\Read\Model\ViewUserSecurity');
 
 
 //The event store
@@ -85,7 +87,7 @@ $commandBus->subscribe($commandHandler);
 
 //doctrine
 $controller = new CreateUserController($commandBus, $validator);
-$controller->updateAction();
+$controller->changeUsernameAction();
 
 /**
  * Class CreateUserController
@@ -117,7 +119,7 @@ class CreateUserController
     /**
      *
      */
-    public function updateAction()
+    public function registerAction()
     {
         //get the data from the form
         //send it to the bus
@@ -130,13 +132,21 @@ class CreateUserController
             echo (string) $violationList;
             return;
         }
-
         $this->commandBus->dispatch($command);
-
         //when asynchronous need to redirect to other page and do some polling or pray for the best
 
         echo 'registering '.$command->username."\n";
         //when synchronous wait for response and decide on that
         echo 'response'."\n\n";
+    }
+
+    public function changeUsernameAction()
+    {
+        $command = new \Milio\User\Domain\Write\Command\ChangeUsernameCommand(
+            StringUserId::generate(TestUtils::USER_ID),
+            new BasicUsername('updatedss_username')
+        );
+
+        $this->commandBus->dispatch($command);
     }
 }

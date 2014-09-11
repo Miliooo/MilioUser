@@ -14,6 +14,11 @@ class ViewUserSecurity implements ReadModelInterface
     /**
      * @var string
      */
+    public $id;
+
+    /**
+     * @var string
+     */
     public $userId;
 
     /**

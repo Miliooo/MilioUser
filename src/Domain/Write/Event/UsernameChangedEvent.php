@@ -3,7 +3,6 @@
 namespace Milio\User\Domain\Write\Event;
 
 use Broadway\Serializer\SerializableInterface;
-use Milio\User\Domain\ValueObjects\UserId;
 
 /**
  * Class UsernameChangedEvent
@@ -17,11 +16,11 @@ class UsernameChangedEvent implements SerializableInterface
     private $updatedUsername;
 
     /**
-     * @param UserId $userId
+     * @param string $userId
      * @param string $previousUsername
      * @param string $updatedUsername
      */
-    public function __construct(UserId $userId, $previousUsername, $updatedUsername)
+    public function __construct($userId, $previousUsername, $updatedUsername)
     {
         $this->userId = $userId;
         $this->previousUsername = $previousUsername;
@@ -45,7 +44,7 @@ class UsernameChangedEvent implements SerializableInterface
     }
 
     /**
-     * @return UserId
+     * @return string
      */
     public function getUserId()
     {

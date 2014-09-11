@@ -2,6 +2,8 @@
 
 namespace Milio\User\Domain\ValueObjects;
 
+use Rhumsaa\Uuid\Uuid;
+
 /**
  * String implementation.
  *
@@ -36,5 +38,20 @@ class StringUserId extends UserId
     public function getUserId()
     {
         return $this->userId;
+    }
+
+
+    /**
+     * @param string $value
+     *
+     * @return static
+     */
+    public static function generate($value = '')
+    {
+        if (empty($value)) {
+            return new static(Uuid::uuid4()->toString());
+        }
+
+        return new static($value);
     }
 }

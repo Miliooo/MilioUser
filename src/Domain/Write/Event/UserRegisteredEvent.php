@@ -110,13 +110,14 @@ class UserRegisteredEvent implements SerializableInterface
      */
     public static function deserialize(array $data)
     {
+
         return new self(
             $data['userId'],
             $data['username'],
             $data['email'],
             $data['password'],
             $data['salt'],
-            $data['dateRegistered'],
+            new \DateTime($data['dateRegistered']['date']),
             $data['roles']
         );
     }

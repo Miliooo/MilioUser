@@ -8,7 +8,6 @@ use Milio\User\Domain\ValueObjects\UserId;
 use Milio\User\Domain\Write\Event\UserRegisteredEvent;
 use Milio\User\Domain\ValueObjects\Username;
 use Milio\User\Domain\Write\Event\UsernameChangedEvent;
-use Milio\User\Domain\ValueObjects\StringUserId;
 
 /**
  * The user security model is used for logging in users. For giving them more or less rights.
@@ -95,11 +94,11 @@ class UserSecurity extends EventSourcedAggregateRoot
      */
     public function changeUsername(Username $username)
     {
-        if ($username->getUsername() === $username) {
+        if ($username->getUsername() === $this->username) {
             return;
         }
 
-        $this->apply(new UsernameChangedEvent(new StringUserId($this->userId), $this->username, $username->getUsername()));
+        $this->apply(new UsernameChangedEvent($this->userId, $this->username, $username->getUsername()));
     }
 
     /**

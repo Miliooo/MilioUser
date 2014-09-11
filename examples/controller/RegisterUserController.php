@@ -64,17 +64,20 @@ $isDevMode = false;
 //the readmodel projector
 //$userReadRepository = new DoctrineORMRepository($entityManager, 'Milio\User\Domain\Read\Model\ViewUserSecurity');
 $repositoryFactory = new DoctrineORMRepositoryFactory($entityManager);
-$userReadRepository = $repositoryFactory->create('user', 'Milio\User\Domain\Read\Model\ViewUserSecurity');
+$userSecurityRepository = $repositoryFactory->create('userSecurity', 'Milio\User\Domain\Read\Model\ViewUserSecurity');
+$userProfileRepository = $repositoryFactory->create('userProfile', 'Milio\User\Domain\Read\Model\ViewUserProfile');
 
-$userReadModelProjector = new ViewUserSecurityModelProjector($userReadRepository, 'Milio\User\Domain\Read\Model\ViewUserSecurity');
 
+$userSecurityModelProjector = new ViewUserSecurityModelProjector($userSecurityRepository, 'Milio\User\Domain\Read\Model\ViewUserSecurity');
+$userProfileModelProjector = new \Milio\User\Domain\Read\Projector\ViewUserProfileModelProjector($userProfileRepository, 'Milio\User\Domain\Read\Model\ViewUserProfile');
 
 //The event store
 $eventStore = new InMemoryEventStore();
 
 //the event bus
 $eventBus = new TraceableEventBus(new SimpleEventBus());
-$eventBus->subscribe($userReadModelProjector);
+$eventBus->subscribe($userSecurityModelProjector);
+$eventBus->subscribe($userProfileModelProjector);
 
 $repository = new UserWriteEventSourcingRepository($dbalEventStore, $eventBus, 'Milio\User\Domain\Write\Model\UserSecurity');
 
@@ -87,7 +90,7 @@ $commandBus->subscribe($commandHandler);
 
 //doctrine
 $controller = new CreateUserController($commandBus, $validator);
-$controller->deleteAction();
+$controller->registerAction();
 
 /**
  * Class CreateUserController

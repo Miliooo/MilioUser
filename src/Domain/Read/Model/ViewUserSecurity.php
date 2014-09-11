@@ -5,7 +5,7 @@ namespace Milio\User\Domain\Read\Model;
 use Broadway\ReadModel\ReadModelInterface;
 
 /**
- * User Read model
+ * This view is used in the context of authorization and changing critical user settings like username and password.
  *
  * @author Michiel Boeckaert <boeckaert@gmail.com>
  */

@@ -87,7 +87,7 @@ $commandBus->subscribe($commandHandler);
 
 //doctrine
 $controller = new CreateUserController($commandBus, $validator);
-$controller->changeUsernameAction();
+$controller->deleteAction();
 
 /**
  * Class CreateUserController
@@ -148,5 +148,15 @@ class CreateUserController
         );
 
         $this->commandBus->dispatch($command);
+    }
+
+    public function deleteAction()
+    {
+        $command = new \Milio\User\Domain\Write\Command\DeleteUserCommand(
+            StringUserId::generate(TestUtils::USER_ID)
+        );
+
+        $this->commandBus->dispatch($command);
+        echo 'deleted';
     }
 }

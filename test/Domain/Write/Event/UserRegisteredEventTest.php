@@ -4,6 +4,7 @@ namespace Milio\User\Domain\Write\Event;
 
 use Broadway\Serializer\Testing\SerializableEventTestCase;
 use Milio\User\Domain\Utils\TestUtils;
+
 /**
  * Class UserRegisteredEventTest
  *

@@ -21,7 +21,7 @@ class SecurityUserCommandHandler extends CommandHandler
     /**
      * @var UserWriteEventSourcingRepository
      */
-    private $repository;
+    protected $repository;
 
     /**
      * @var UserSecurity

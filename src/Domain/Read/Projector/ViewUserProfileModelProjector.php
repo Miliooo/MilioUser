@@ -19,7 +19,7 @@ class ViewUserProfileModelProjector extends Projector
     /**
      * @var RepositoryInterface
      */
-    private $repository;
+    protected $repository;
 
     /**
      * @var string

@@ -10,7 +10,7 @@ use Milio\User\Domain\Utils\TestUtils;
  *
  * @author Michiel Boeckaert <boeckaert@gmail.com>
  */
-class UserRegisteredEventTest extends SerializableEventTestCase
+class UserDeletedEventTest extends SerializableEventTestCase
 {
     /**
      * @return mixed

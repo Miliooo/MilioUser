@@ -48,10 +48,11 @@ class ViewUserProfileModelProjector extends Projector
     public function applyUserRegisteredEvent(UserRegisteredEvent $event, DomainMessageInterface $domainMessage)
     {
         $class = $this->class;
+        /** @var ViewUserProfile $model */
         $model = new $class();
         $model->userId = (string) $event->userId;
         $model->username = $event->username;
-        $model->isDeleted = false;
+        $model->accountStatus = $event->accountStatus;
 
         $this->repository->save($model);
     }

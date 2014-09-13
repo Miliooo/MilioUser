@@ -28,11 +28,6 @@ class ViewUserProfile implements ReadModelInterface
     public $username;
 
     /**
-     * @var boolean We should filter our results based on this.
-     */
-    public $isDeleted;
-
-    /**
      * @var string
      */
     public $accountStatus;
@@ -43,14 +38,6 @@ class ViewUserProfile implements ReadModelInterface
     public function getId()
     {
         return $this->userId;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function getIsDeleted()
-    {
-        return (bool) $this->isDeleted;
     }
 
     /**
@@ -67,5 +54,13 @@ class ViewUserProfile implements ReadModelInterface
     public function getUsername()
     {
         return $this->username;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAccountStatus()
+    {
+        return $this->accountStatus;
     }
 }

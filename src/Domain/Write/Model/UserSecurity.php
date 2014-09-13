@@ -75,7 +75,7 @@ class UserSecurity extends EventSourcedAggregateRoot
      */
     public static function registerUser(UserId $userId, Username $username, $email, password $password, \DateTime $dateRegistered)
     {
-        $user =  new self();
+        $user =  new static();
 
         $user->apply(new UserRegisteredEvent(
             $userId->getUserId(),

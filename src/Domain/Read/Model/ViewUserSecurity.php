@@ -42,9 +42,9 @@ class ViewUserSecurity implements ReadModelInterface
     public $salt;
 
     /**
-     * @var bool
+     * @var string
      */
-    public $isDeleted = false;
+    public $accountStatus;
 
     /**
      * @var \DateTime

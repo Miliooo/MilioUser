@@ -22,7 +22,7 @@ class ChangeUsernameCommandScenarioTest extends CommandHandlerScenarioTestCase
     /**
      * @test
      */
-    public function it_can_change_the_username()
+    public function username_can_be_changed()
     {
         $registerEvent = TestUtils::getUserRegisteredEvent();
         $changeUsernameCommand = new ChangeUsernameCommand(TestUtils::getUserId(), new BasicUsername('updated_username'));

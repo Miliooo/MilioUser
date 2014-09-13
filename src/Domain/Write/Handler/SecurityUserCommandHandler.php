@@ -5,11 +5,10 @@ namespace Milio\User\Domain\Write\Handler;
 use Broadway\CommandHandling\CommandHandler;
 use Milio\User\Domain\Write\Command\ChangeUsernameCommand;
 use Milio\User\Domain\Write\Command\RegisterUserCommand;
-use Milio\User\Domain\Write\Command\DeleteUserCommand;
+use Milio\User\Domain\Write\Command\UpdateAccountStatusCommand;
 use Milio\User\Domain\Write\Model\UserWriteEventSourcingRepository;
 use Milio\User\Domain\Write\Model\UserSecurity;
 use Milio\User\Domain\ValueObjects\UserId;
-
 
 /**
  * Class SecurityUserCommandHandler
@@ -68,12 +67,12 @@ class SecurityUserCommandHandler extends CommandHandler
     }
 
     /**
-     * @param DeleteUserCommand $command
+     * @param UpdateAccountStatusCommand $command
      */
-    public function handleDeleteUserCommand(DeleteUserCommand $command)
+    public function handleUpdateAccountStatusCommand(UpdateAccountStatusCommand $command)
     {
         $aggregate = $this->loadAggregate($command->userId);
-        $aggregate->deleteUser($command->userId);
+        $aggregate->updateAccountStatus($command->status);
         $this->repository->add($aggregate);
     }
 

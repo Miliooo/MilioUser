@@ -4,7 +4,7 @@ namespace Milio\User\Domain\Write\Event;
 
 use Broadway\Serializer\Testing\SerializableEventTestCase;
 use Milio\User\Domain\Utils\TestUtils;
-
+use Milio\User\Domain\Write\Model\UserSecurity;
 /**
  * Class UserRegisteredEventTest
  *
@@ -24,7 +24,8 @@ class UserRegisteredEventTest extends SerializableEventTestCase
             'secretpass',
             'my_hash',
             new \DateTime(TestUtils::DATE_TIME),
-            ['ROLE_USER']
+            ['ROLE_USER'],
+            UserSecurity::ACCOUNT_STATUS_DELETED
         );
     }
 }

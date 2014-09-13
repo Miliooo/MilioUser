@@ -7,7 +7,8 @@ use Broadway\Domain\DomainMessageInterface;
 use Broadway\ReadModel\RepositoryInterface;
 use Milio\User\Domain\Write\Event\UserRegisteredEvent;
 use Milio\User\Domain\Write\Event\UsernameChangedEvent;
-use Milio\User\Domain\Write\Event\UserDeletedEvent;
+use Milio\User\Domain\Write\Event\AccountStatusUpdatedEvent;
+use Milio\User\Domain\Read\Model\ViewUserProfile;
 
 /**
  * Class ViewUserProfileModelProjector
@@ -48,8 +49,8 @@ class ViewUserProfileModelProjector extends Projector
     {
         $class = $this->class;
         $model = new $class();
-        $model->userId = (string) $event->getUserId();
-        $model->username = $event->getUsername();
+        $model->userId = (string) $event->userId;
+        $model->username = $event->username;
         $model->isDeleted = false;
 
         $this->repository->save($model);
@@ -61,20 +62,31 @@ class ViewUserProfileModelProjector extends Projector
      */
     public function applyUsernameChangedEvent(UsernameChangedEvent $event, DomainMessageInterface $domainMessage)
     {
-        $model = $this->repository->find($event->getUserId());
+        $model = $this->retrieveModel($event->getUserId());
         $model->username = $event->getUpdatedUsername();
         $this->repository->save($model);
     }
 
     /**
-     * @param UserDeletedEvent       $event
-     * @param DomainMessageInterface $domainMessage
+     * @param AccountStatusUpdatedEvent $event
+     * @param DomainMessageInterface    $domainMessage
      */
-    public function applyUserDeletedEvent(UserDeletedEvent $event, DomainMessageInterface $domainMessage)
+    public function applyAccountStatusUpdatedEvent(AccountStatusUpdatedEvent $event, DomainMessageInterface $domainMessage)
     {
-        $model = $this->repository->find($event->userId);
-        $model->isDeleted = true;
-
+        $model = $this->retrieveModel($event->userId);
+        $model->accountStatus = $event->updated;
         $this->repository->save($model);
+    }
+
+    /**
+     * Helper function to get auto completion.
+     *
+     * @param string $userId
+     *
+     * @return ViewUserProfile
+     */
+    protected function retrieveModel($userId)
+    {
+        return $this->repository->find($userId);
     }
 }

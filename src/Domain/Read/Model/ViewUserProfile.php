@@ -33,6 +33,11 @@ class ViewUserProfile implements ReadModelInterface
     public $isDeleted;
 
     /**
+     * @var string
+     */
+    public $accountStatus;
+
+    /**
      * @return string
      */
     public function getId()

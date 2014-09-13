@@ -11,13 +11,14 @@ use Broadway\Serializer\SerializableInterface;
  */
 class UserRegisteredEvent implements SerializableInterface
 {
-    private $userId;
-    private $username;
-    private $email;
-    private $password;
-    private $salt;
-    private $dateRegistered;
-    private $roles = [];
+    public $userId;
+    public $username;
+    public $email;
+    public $password;
+    public $salt;
+    public $dateRegistered;
+    public $roles = [];
+    public $accountStatus;
 
     /**
      * @param string    $userId         String UserId
@@ -27,8 +28,9 @@ class UserRegisteredEvent implements SerializableInterface
      * @param string    $salt           String salt
      * @param \DateTime $dateRegistered \DateTime
      * @param array     $roles          The roles the user has.
+     * @param string    $accountStatus  The current account status
      */
-    public function __construct($userId, $username, $email, $password, $salt, \DateTime $dateRegistered, array $roles)
+    public function __construct($userId, $username, $email, $password, $salt, \DateTime $dateRegistered, array $roles, $accountStatus)
     {
         $this->userId = $userId;
         $this->username = $username;
@@ -37,72 +39,7 @@ class UserRegisteredEvent implements SerializableInterface
         $this->salt = $salt;
         $this->dateRegistered = $dateRegistered;
         $this->roles = $roles;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getDateRegistered()
-    {
-        return $this->dateRegistered;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSalt()
-    {
-        return $this->salt;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    /**
-     * Gets the roles the user has when he's registered.
-     *
-     * @return array
-     */
-    public function getRoles()
-    {
-        return $this->roles;
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->username;
+        $this->accountStatus = $accountStatus;
     }
 
     /**
@@ -120,7 +57,8 @@ class UserRegisteredEvent implements SerializableInterface
             $data['password'],
             $data['salt'],
             $dateTimeFromTimestamp,
-            $data['roles']
+            $data['roles'],
+            $data['account_status']
         );
     }
 
@@ -136,7 +74,8 @@ class UserRegisteredEvent implements SerializableInterface
             'password' => $this->password,
             'salt' => $this->salt,
             'date_registered' => $this->dateRegistered->getTimestamp(),
-            'roles' => $this->roles
+            'roles' => $this->roles,
+            'account_status' => $this->accountStatus
         ];
     }
 }

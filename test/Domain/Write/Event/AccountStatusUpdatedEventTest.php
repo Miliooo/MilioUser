@@ -3,20 +3,19 @@
 namespace Milio\User\Domain\Write\Event;
 
 use Broadway\Serializer\Testing\SerializableEventTestCase;
-use Milio\User\Domain\Utils\TestUtils;
 
 /**
  * Class UserRegisteredEventTest
  *
  * @author Michiel Boeckaert <boeckaert@gmail.com>
  */
-class UserDeletedEventTest extends SerializableEventTestCase
+class AccountStatusUpdatedEventTest extends SerializableEventTestCase
 {
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     protected function createEvent()
     {
-        return new UserDeletedEvent(TestUtils::USER_ID);
+        return new AccountStatusUpdatedEvent('5', 'previous', 'updatedd');
     }
 }

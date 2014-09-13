@@ -7,7 +7,8 @@ use Broadway\Domain\DomainMessageInterface;
 use Broadway\ReadModel\RepositoryInterface;
 use Milio\User\Domain\Write\Event\UserRegisteredEvent;
 use Milio\User\Domain\Write\Event\UsernameChangedEvent;
-use Milio\User\Domain\Write\Event\UserDeletedEvent;
+use Milio\User\Domain\Read\Model\ViewUserSecurity;
+use Milio\User\Domain\Write\Event\AccountStatusUpdatedEvent;
 
 /**
  * The user read model projector is responsible for applying the events to the read model.
@@ -48,13 +49,14 @@ class ViewUserSecurityModelProjector extends Projector
     {
         $class = $this->class;
         $model = new $class();
-        $model->userId = (string) $event->getUserId();
-        $model->username = $event->getUsername();
-        $model->email = $event->getEmail();
-        $model->password = $event->getPassword();
-        $model->salt = $event->getSalt();
-        $model->dateRegistered = $event->getDateRegistered();
-        $model->roles = implode(' ', $event->getRoles());
+        $model->userId = (string) $event->userId;
+        $model->username = $event->username;
+        $model->email = $event->email;
+        $model->password = $event->password;
+        $model->salt = $event->salt;
+        $model->dateRegistered = $event->dateRegistered;
+        $model->roles = implode(' ', $event->roles);
+        $model->accountStatus = $event->accountStatus;
 
         $this->repository->save($model);
     }
@@ -65,21 +67,32 @@ class ViewUserSecurityModelProjector extends Projector
      */
     public function applyUsernameChangedEvent(UsernameChangedEvent $event, DomainMessageInterface $domainMessage)
     {
-        $model = $this->repository->find($event->getUserId());
+        $model = $this->retrieveModel($event->getUserId());
         $model->username = $event->getUpdatedUsername();
 
         $this->repository->save($model);
     }
 
     /**
-     * @param UserDeletedEvent       $event
-     * @param DomainMessageInterface $domainMessage
+     * @param AccountStatusUpdatedEvent $event
+     * @param DomainMessageInterface    $domainMessage
      */
-    public function applyUserDeletedEvent(UserDeletedEvent $event, DomainMessageInterface $domainMessage)
+    public function applyAccountStatusUpdatedEvent(AccountStatusUpdatedEvent $event, DomainMessageInterface $domainMessage)
     {
-        $model = $this->repository->find($event->userId);
-        $model->isDeleted = true;
-
+        $model = $this->retrieveModel($event->userId);
+        $model->accountStatus = $event->updated;
         $this->repository->save($model);
+    }
+
+    /**
+     * Helper function to get auto completion.
+     *
+     * @param string $userId
+     *
+     * @return ViewUserSecurity
+     */
+    protected function retrieveModel($userId)
+    {
+        return $this->repository->find($userId);
     }
 }

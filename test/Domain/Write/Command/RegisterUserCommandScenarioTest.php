@@ -20,7 +20,7 @@ class RegisterUserCommandScenarioTestCase extends CommandHandlerScenarioTestCase
     /**
      * @test
      */
-    public function it_can_register_new_users()
+    public function it_registers_new_users()
     {
         $command = TestUtils::getRegisterUserCommand();
         $event = TestUtils::getUserRegisteredEvent();

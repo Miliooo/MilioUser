@@ -5,10 +5,10 @@ namespace Milio\User\Domain\Write\Model;
 use Broadway\EventSourcing\EventSourcedAggregateRoot;
 use Milio\User\Domain\ValueObjects\Password;
 use Milio\User\Domain\ValueObjects\UserId;
+use Milio\User\Domain\Write\Event\AccountStatusUpdatedEvent;
 use Milio\User\Domain\Write\Event\UserRegisteredEvent;
 use Milio\User\Domain\ValueObjects\Username;
 use Milio\User\Domain\Write\Event\UsernameChangedEvent;
-use Milio\User\Domain\Write\Event\UserDeletedEvent;
 
 /**
  * The user security model is used for logging in users. For giving them more or less rights.
@@ -18,6 +18,13 @@ use Milio\User\Domain\Write\Event\UserDeletedEvent;
 class UserSecurity extends EventSourcedAggregateRoot
 {
     CONST DEFAULT_ROLE = "ROLE_USER";
+    CONST DEFAULT_ACCOUNT_STATUS = "active";
+
+    CONST ACCOUNT_STATUS_ACTIVE = "active";
+    CONST ACCOUNT_STATUS_LOCKED = "locked";
+    CONST ACCOUNT_STATUS_DELETED = "deleted";
+    CONST ACCOUNT_STATUS_AWAITING_CONFIRMATION = "aw_conf";
+    CONST ACCOUNT_STATUS_EXPIRED = "expired";
 
     /**
      * @var string
@@ -50,14 +57,9 @@ class UserSecurity extends EventSourcedAggregateRoot
     protected $dateRegistered;
 
     /**
-     * @var bool
+     * @var string One of the account status commands.
      */
-    protected $isDeleted = false;
-
-    /**
-     * @var bool
-     */
-    protected $isBanned = false;
+    protected $accountStatus = self::DEFAULT_ACCOUNT_STATUS;
 
     /**
      * @var array
@@ -84,7 +86,8 @@ class UserSecurity extends EventSourcedAggregateRoot
             $password->getHashedPassword(),
             $password->getSalt(),
             $dateRegistered,
-            [static::DEFAULT_ROLE]
+            [self::DEFAULT_ROLE],
+            self::DEFAULT_ACCOUNT_STATUS
             ));
 
         return $user;
@@ -103,23 +106,23 @@ class UserSecurity extends EventSourcedAggregateRoot
     }
 
     /**
-     * @param UserId $userId
+     * @param $status
      */
-    public function deleteUser(UserId $userId)
+    public function updateAccountStatus($status)
     {
-        if ($this->isDeleted) {
+        if ($this->accountStatus === $status) {
             return;
         }
 
-        $this->apply(new UserDeletedEvent($userId));
+        $this->apply(new AccountStatusUpdatedEvent($this->userId, $this->accountStatus, $status));
     }
 
     /**
-     * @param UserDeletedEvent $event
+     * @param AccountStatusUpdatedEvent $event
      */
-    public function applyUserDeletedEvent(UserDeletedEvent $event)
+    public function applyAccountStatusUpdatedEvent(AccountStatusUpdatedEvent $event)
     {
-        $this->isDeleted = true;
+        $this->accountStatus = $event->updated;
     }
 
     /**
@@ -135,13 +138,14 @@ class UserSecurity extends EventSourcedAggregateRoot
      */
     public function applyUserRegisteredEvent(UserRegisteredEvent $event)
     {
-        $this->userId = $event->getUserId();
-        $this->username = $event->getUsername();
-        $this->email = $event->getEmail();
-        $this->password = $event->getPassword();
-        $this->salt = $event->getSalt();
-        $this->dateRegistered = $event->getDateRegistered();
-        $this->roles = static::DEFAULT_ROLE;
+        $this->userId = $event->userId;
+        $this->username = $event->username;
+        $this->email = $event->email;
+        $this->password = $event->password;
+        $this->salt = $event->salt;
+        $this->dateRegistered = $event->dateRegistered;
+        $this->roles = $event->roles;
+        $this->accountStatus = $event->accountStatus;
     }
 
     /**

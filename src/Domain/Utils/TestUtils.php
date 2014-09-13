@@ -8,6 +8,8 @@ use Milio\User\Domain\ValueObjects\StringUserId;
 use Milio\User\Domain\Write\Command\RegisterUserCommand;
 use Milio\User\Domain\Write\Event\UserRegisteredEvent;
 use Milio\User\Domain\ValueObjects\UserId;
+use Milio\User\Domain\Write\Model\UserSecurity;
+
 /**
  * Class TestUtils
  *
@@ -109,7 +111,8 @@ class TestUtils
             self::PASSWORD_HASH,
             self::PASSWORD_SALT,
             self::getDateTime(),
-            [self::ROLE_SIGNUP]
+            [self::ROLE_SIGNUP],
+            UserSecurity::DEFAULT_ACCOUNT_STATUS
         );
     }
 }

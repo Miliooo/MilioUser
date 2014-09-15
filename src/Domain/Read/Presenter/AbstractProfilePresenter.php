@@ -55,7 +55,7 @@ abstract class AbstractProfilePresenter implements UserProfilePresenterInterface
     public function getData()
     {
         return [
-            'id' => $this->profile->getUserId(),
+            'id' => $this->getId(),
             'user_name' => $this->getUsername(),
             'status' => $this->getStatus()
         ];

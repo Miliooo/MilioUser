@@ -9,7 +9,7 @@ use Milio\User\Domain\Read\Model\ViewUserProfile;
  *
  * @author Michiel Boeckaert <boeckaert@gmail.com>
  */
-abstract class AbstractProfilePresenter
+abstract class AbstractProfilePresenter implements UserProfilePresenterInterface
 {
     protected $profile;
 
@@ -37,12 +37,13 @@ abstract class AbstractProfilePresenter
         return ucFirst($this->profile->getUsername());
     }
 
+
     /**
-     * @return String <img string>
+     * @return string url to the avatar
      */
     public function getAvatar()
     {
-        return $this->getGravatar('foo@test.com');
+        return $this->getGravatar('foo@test.com'.rand(1,100));
     }
 
 
@@ -72,7 +73,7 @@ abstract class AbstractProfilePresenter
      *
      * @return String containing either just a URL or a complete image tag
      */
-    private function getGravatar($email, $s = 80, $d = 'monsterid', $r = 'g', $img = true, $atts = [])
+    private function getGravatar($email, $s = 80, $d = 'wavatar', $r = 'g', $img = false, $atts = [])
     {
         $url = 'http://www.gravatar.com/avatar/';
         $url .= md5(strtolower(trim($email)));

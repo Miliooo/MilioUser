@@ -25,4 +25,12 @@ class NullUserProfilePresenter extends AbstractProfilePresenter
     {
         return 'Removed';
     }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return 'null';
+    }
 }

@@ -4,6 +4,7 @@ namespace Milio\User\Domain\Read\Presenter;
 
 use Milio\User\Domain\Read\Model\ViewUserProfile;
 
+
 /**
  * Naive implementation of an user profile presenter.
  *
@@ -15,6 +16,9 @@ use Milio\User\Domain\Read\Model\ViewUserProfile;
  */
 class UserProfilePresenterFactory
 {
+    /**
+     * @var UserProfilePresenterInterface[]
+     */
     private $presenters = [];
 
     /**
@@ -26,8 +30,10 @@ class UserProfilePresenterFactory
     {
         //handles no user view models. For example if your database has a reference to an userid which doesn't exist anymore.
         if ($profile === null) {
-            return new NullUserProfilePresenter();
+            return $this->presenters['null'];
         }
+
+        return $this->presenters[$profile->getAccountStatus()];
     }
 
     /**

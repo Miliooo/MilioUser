@@ -1,0 +1,50 @@
+Milio\User\Domain\Read\Presenter\ActiveUserProfilePresenter
+ [x] it has the right interface
+
+Milio\User\Domain\Read\Presenter\NullUserProfilePresenter
+ [x] it has the right interface
+
+Milio\User\Domain\Read\Presenter\UserProfilePresenterFactory
+ [x] it can add presenters
+ [x] it loads the presenter based on the account status
+
+Milio\User\Domain\Read\Projector\ViewUserSecurityModelProjectorTestCase
+ [x] it creates new model when user registered event
+ [x] it updates the username when username changed event
+ [x] it can update the account status
+
+Milio\User\Domain\ValueObjects\UserId
+ [x] Interface
+
+Milio\User\Domain\ValueObjects\Username
+ [x] it should be a string
+ [x] it should be trimmed
+ [x] it should have at least two characters
+ [x] it should have maximum 25 characters
+
+Milio\User\Domain\Write\Command\ChangeUsernameCommandScenario
+ [x] username can be changed
+ [x] changing to the same username yields no change
+
+Milio\User\Domain\Write\Command\RegisterUserCommandScenarioTestCase
+ [x] it registers new users
+
+Milio\User\Domain\Write\Command\UpdateAccountStatusCommandScenario
+ [x] it can update the status
+ [x] updating to the same status yields no change
+
+Milio\User\Domain\Write\Event\AccountStatusUpdatedEvent
+ [x] it should be serializable
+ [x] serializing and deserializing yields the same object
+
+Milio\User\Domain\Write\Event\UserRegisteredEvent
+ [x] it should be serializable
+ [x] serializing and deserializing yields the same object
+
+Milio\User\Domain\Write\Event\UsernameChangedEvent
+ [x] it should be serializable
+ [x] serializing and deserializing yields the same object
+
+Milio\User\Domain\Write\Model\UserSecurity
+ [x] it should set attributes and return self
+

@@ -2,6 +2,8 @@
 
 namespace Milio\User\Domain\Read\Presenter;
 
+use Milio\User\Domain\Write\Model\UserSecurity;
+
 /**
  * Class ActiveUserProfilePresenter
  *
@@ -15,5 +17,13 @@ class ActiveUserProfilePresenter extends AbstractProfilePresenter
     public function getStatus()
     {
         return 'active';
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return UserSecurity::ACCOUNT_STATUS_ACTIVE;
     }
 }

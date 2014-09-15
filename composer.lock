@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "36837347bd797605bffdbd40fa406700",
+    "hash": "ad44d96298a1f0792522ec2b2af3c042",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -53,12 +53,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/qandidate-labs/broadway.git",
-                "reference": "a7fafb0667be3178848f44257c8a2ac297bd0a65"
+                "reference": "e0f5c7e3ecac2e41dd26923c5633e5d22832397f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/qandidate-labs/broadway/zipball/a7fafb0667be3178848f44257c8a2ac297bd0a65",
-                "reference": "a7fafb0667be3178848f44257c8a2ac297bd0a65",
+                "url": "https://api.github.com/repos/qandidate-labs/broadway/zipball/e0f5c7e3ecac2e41dd26923c5633e5d22832397f",
+                "reference": "e0f5c7e3ecac2e41dd26923c5633e5d22832397f",
                 "shasum": ""
             },
             "require": {
@@ -131,11 +131,11 @@
                 "domain-driven design",
                 "event sourcing"
             ],
-            "time": "2014-09-12 07:33:03"
+            "time": "2014-09-15 13:18:31"
         },
         {
             "name": "broadway/uuid-generator",
-            "version": "dev-master",
+            "version": "0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/qandidate-labs/broadway-uuid-generator.git",
@@ -643,6 +643,51 @@
                 "parser"
             ],
             "time": "2014-09-09 13:34:57"
+        },
+        {
+            "name": "milio/cqrs-es",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Miliooo/MilioCQRSES.git",
+                "reference": "0190620230aae3fee49b3de145e800eb842a3e7c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Miliooo/MilioCQRSES/zipball/0190620230aae3fee49b3de145e800eb842a3e7c",
+                "reference": "0190620230aae3fee49b3de145e800eb842a3e7c",
+                "shasum": ""
+            },
+            "require": {
+                "broadway/broadway": "0.2.*@dev",
+                "broadway/uuid-generator": "0.1.*"
+            },
+            "require-dev": {
+                "satooshi/php-coveralls": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Milio\\CQRS\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michiel Boeckaert",
+                    "email": "Boeckaert@gmail.com"
+                }
+            ],
+            "description": "CQRS Event Sourcing classes, some extra functionality on top of broadway",
+            "homepage": "https://github.com/Miliooo/MilioCQRSES",
+            "keywords": [
+                "cqrs",
+                "event sourcing"
+            ],
+            "time": "2014-09-15 14:06:53"
         },
         {
             "name": "rhumsaa/uuid",
@@ -1600,8 +1645,7 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "broadway/broadway": 20,
-        "broadway/uuid-generator": 20,
+        "milio/cqrs-es": 20,
         "satooshi/php-coveralls": 20
     },
     "platform": [

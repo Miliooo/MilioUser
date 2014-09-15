@@ -13,9 +13,8 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "broadway/broadway": "0.2.*@dev",
-        "broadway/uuid-generator": "dev-master@dev",
-        "doctrine/dbal": "~2.4"
+        "doctrine/dbal": "~2.4",
+        "milio/cqrs-es": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "~3",

@@ -650,20 +650,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Miliooo/MilioCQRSES.git",
-                "reference": "0190620230aae3fee49b3de145e800eb842a3e7c"
+                "reference": "207d03983c81cc5319a72b1ef2065b631c189df7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Miliooo/MilioCQRSES/zipball/0190620230aae3fee49b3de145e800eb842a3e7c",
-                "reference": "0190620230aae3fee49b3de145e800eb842a3e7c",
+                "url": "https://api.github.com/repos/Miliooo/MilioCQRSES/zipball/207d03983c81cc5319a72b1ef2065b631c189df7",
+                "reference": "207d03983c81cc5319a72b1ef2065b631c189df7",
                 "shasum": ""
             },
             "require": {
                 "broadway/broadway": "0.2.*@dev",
-                "broadway/uuid-generator": "0.1.*"
-            },
-            "require-dev": {
-                "satooshi/php-coveralls": "dev-master"
+                "broadway/uuid-generator": "0.1.*@dev"
             },
             "type": "library",
             "autoload": {
@@ -687,7 +684,7 @@
                 "cqrs",
                 "event sourcing"
             ],
-            "time": "2014-09-15 14:06:53"
+            "time": "2014-09-15 14:23:02"
         },
         {
             "name": "rhumsaa/uuid",

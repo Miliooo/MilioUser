@@ -2,14 +2,12 @@
 
 namespace Milio\User\Domain\ValueObjects;
 
+use Milio\CQRS\Identifier\AggregateIdentifier;
+
 /**
- * Makes it possible to extend this.
- *
  * @author Michiel Boeckaert <boeckaert@gmail.com>
  */
-abstract class UserId
+class UserId extends AggregateIdentifier
 {
-    abstract public function __toString();
 
-    abstract public function getUserId();
 }

@@ -80,7 +80,7 @@ class UserSecurity extends EventSourcedAggregateRoot
         $user =  new static();
 
         $user->apply(new UserRegisteredEvent(
-            $userId->getUserId(),
+            $userId->getIdentifierString(),
             $username->getUsername(),
             $email,
             $password->getHashedPassword(),

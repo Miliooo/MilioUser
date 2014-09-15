@@ -4,7 +4,6 @@ namespace Milio\User\Domain\Utils;
 
 use Milio\User\Domain\ValueObjects\BasicUsername;
 use Milio\User\Domain\ValueObjects\Password;
-use Milio\User\Domain\ValueObjects\StringUserId;
 use Milio\User\Domain\Write\Command\RegisterUserCommand;
 use Milio\User\Domain\Write\Event\UserRegisteredEvent;
 use Milio\User\Domain\ValueObjects\UserId;
@@ -30,7 +29,7 @@ class TestUtils
      */
     public static function getUserId()
     {
-        return new StringUserId(self::USER_ID);
+        return new UserId(self::USER_ID);
     }
 
     /**

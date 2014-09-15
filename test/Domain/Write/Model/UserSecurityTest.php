@@ -4,7 +4,7 @@ namespace Milio\User\Domain\Write\Model;
 
 use Milio\User\Domain\ValueObjects\BasicUsername;
 use Milio\User\Domain\ValueObjects\Password;
-use Milio\User\Domain\ValueObjects\StringUserId;
+use Milio\User\Domain\ValueObjects\UserId;
 
 /**
  * Test file for the user write model.
@@ -19,7 +19,7 @@ class UserSecurityTest extends \PHPUnit_Framework_TestCase
     public function it_should_set_attributes_and_return_self()
     {
         $user = UserSecurity::registerUser(
-            new StringUserId('foo'),
+            new UserId('foo'),
             new BasicUsername('name'),
             'foo@bar.com',
             new Password('hashed', 'salt', '123'),

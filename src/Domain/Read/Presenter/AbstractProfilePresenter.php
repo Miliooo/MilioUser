@@ -11,22 +11,17 @@ use Milio\User\Domain\Read\Model\ViewUserProfile;
  */
 abstract class AbstractProfilePresenter implements UserProfilePresenterInterface
 {
-    protected $profile;
-
     /**
-     * @param ViewUserProfile $profile
+     * @var ViewUserProfile
      */
-    public function __construct(ViewUserProfile $profile = null)
-    {
-        $this->profile = $profile;
-    }
+    protected $profile;
 
     /**
      * @return string
      */
     public function getId()
     {
-        return $this->profile->getUserId();
+        return $this->profile->userId;
     }
 
     /**
@@ -34,7 +29,7 @@ abstract class AbstractProfilePresenter implements UserProfilePresenterInterface
      */
     public function getUsername()
     {
-        return ucFirst($this->profile->getUsername());
+        return ucFirst($this->profile->username);
     }
 
 
@@ -50,10 +45,12 @@ abstract class AbstractProfilePresenter implements UserProfilePresenterInterface
     public abstract function getStatus();
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
-    public function getData()
+    public function getData($userProfile = null)
     {
+        $this->profile = $userProfile;
+
         return [
             'id' => $this->getId(),
             'user_name' => $this->getUsername(),

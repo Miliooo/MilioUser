@@ -10,9 +10,11 @@ namespace Milio\User\Domain\Read\Presenter;
 interface UserProfilePresenterInterface
 {
     /**
-     * @return array
+     * @param null $userProfile
+     *
+     * @return mixed
      */
-    public function getData();
+    public function getData($userProfile = null);
 
     /**
      * @return string

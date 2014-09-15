@@ -138,7 +138,7 @@ class UserSecurity extends EventSourcedAggregateRoot
      */
     public function applyUserRegisteredEvent(UserRegisteredEvent $event)
     {
-        $this->userId = $event->userId;
+        $this->userId = (string) $event->userId;
         $this->username = $event->username;
         $this->email = $event->email;
         $this->password = $event->password;
@@ -153,6 +153,6 @@ class UserSecurity extends EventSourcedAggregateRoot
      */
     public function getId()
     {
-        return $this->userId;
+        return (string) $this->userId;
     }
 }

@@ -38,6 +38,7 @@ class AccountStatusUpdatedEvent implements SerializableInterface
         $this->userId = $userId;
         $this->previous = $previous;
         $this->updated = $updated;
+
     }
 
     /**

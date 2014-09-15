@@ -37,7 +37,7 @@ class ViewUserSecurityModelProjectorTestCase extends ProjectorScenarioTestCase
     {
         $newUsername = 'foo_bar';
         $userRegisteredEvent = TestUtils::getUserRegisteredEvent();
-        $usernameChangedEvent = new UsernameChangedEvent(TestUtils::getUserId(), TestUtils::USERNAME, $newUsername);
+        $usernameChangedEvent = new UsernameChangedEvent(TestUtils::USER_ID, TestUtils::USERNAME, $newUsername);
         $expectedUserModel = $this->getModelWhenRegistered();
         $expectedUserModel->username = $newUsername;
 

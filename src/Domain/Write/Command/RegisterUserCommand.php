@@ -13,7 +13,7 @@ use Milio\User\Domain\ValueObjects\Username;
  *
  * @author Michiel Boeckaert <boeckaert@gmail.com>
  */
-class RegisterUserCommand
+class RegisterUserCommand extends AbstractUserCommand
 {
     /**
      * The userId value object.

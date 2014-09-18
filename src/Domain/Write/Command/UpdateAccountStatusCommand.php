@@ -9,7 +9,7 @@ use Milio\User\Domain\ValueObjects\UserId;
  *
  * @author Michiel Boeckaert <boeckaert@gmail.com>
  */
-class UpdateAccountStatusCommand
+class UpdateAccountStatusCommand extends AbstractUserCommand
 {
     /**
      * @var UserId

@@ -10,7 +10,7 @@ use Milio\User\Domain\ValueObjects\Username;
  *
  * @author Michiel Boeckaert <boeckaert@gmail.com>
  */
-class ChangeUsernameCommand
+class ChangeUsernameCommand extends AbstractUserCommand
 {
     /**
      * @var UserId

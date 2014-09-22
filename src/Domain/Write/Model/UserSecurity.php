@@ -151,7 +151,7 @@ class UserSecurity extends EventSourcedAggregateRoot
     /**
      * @return string
      */
-    public function getId()
+    public function getAggregateRootId()
     {
         return (string) $this->userId;
     }

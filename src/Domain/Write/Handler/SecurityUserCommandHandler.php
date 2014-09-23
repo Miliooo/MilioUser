@@ -2,7 +2,7 @@
 
 namespace Milio\User\Domain\Write\Handler;
 
-use Broadway\CommandHandling\CommandHandler;
+use Milio\CQRS\Command\MilioCommandHandler;
 use Milio\User\Domain\Write\Command\ChangeUsernameCommand;
 use Milio\User\Domain\Write\Command\RegisterUserCommand;
 use Milio\User\Domain\Write\Command\UpdateAccountStatusCommand;
@@ -15,7 +15,7 @@ use Milio\User\Domain\ValueObjects\UserId;
  *
  * @author Michiel Boeckaert <boeckaert@gmail.com>
  */
-class SecurityUserCommandHandler extends CommandHandler
+class SecurityUserCommandHandler extends MilioCommandHandler
 {
     /**
      * @var UserWriteEventSourcingRepository

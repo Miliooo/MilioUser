@@ -705,12 +705,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "15a00ea80746e1b93a5964807a2a6f63143758d3"
+                "reference": "3f8865c6fb52558b23963add95affed6a1cf77bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/15a00ea80746e1b93a5964807a2a6f63143758d3",
-                "reference": "15a00ea80746e1b93a5964807a2a6f63143758d3",
+                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/3f8865c6fb52558b23963add95affed6a1cf77bb",
+                "reference": "3f8865c6fb52558b23963add95affed6a1cf77bb",
                 "shasum": ""
             },
             "require": {
@@ -772,7 +772,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2014-09-14 15:30:47"
+            "time": "2014-09-22 22:30:30"
         },
         {
             "name": "milio/cqrs-es",
@@ -780,16 +780,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Miliooo/MilioCQRSES.git",
-                "reference": "656e4207afbc9c1e1daa3bedf85541ce256e9de5"
+                "reference": "2f017f04178f695e00392fe9ea435a6612d01b19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Miliooo/MilioCQRSES/zipball/656e4207afbc9c1e1daa3bedf85541ce256e9de5",
-                "reference": "656e4207afbc9c1e1daa3bedf85541ce256e9de5",
+                "url": "https://api.github.com/repos/Miliooo/MilioCQRSES/zipball/2f017f04178f695e00392fe9ea435a6612d01b19",
+                "reference": "2f017f04178f695e00392fe9ea435a6612d01b19",
                 "shasum": ""
             },
             "require": {
-                "broadway/broadway": "0.2.*@dev",
+                "broadway/broadway": "0.2.*",
                 "broadway/uuid-generator": "0.1.*",
                 "doctrine/orm": "~2.4"
             },
@@ -815,7 +815,7 @@
                 "cqrs",
                 "event sourcing"
             ],
-            "time": "2014-09-18 16:07:39"
+            "time": "2014-09-22 17:08:52"
         },
         {
             "name": "rhumsaa/uuid",
@@ -890,12 +890,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "3daf10d2a174d8675f305846934fa82ca1f1effc"
+                "reference": "c417d0ac067daa4351112ed25fd4753ea815c840"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/3daf10d2a174d8675f305846934fa82ca1f1effc",
-                "reference": "3daf10d2a174d8675f305846934fa82ca1f1effc",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/c417d0ac067daa4351112ed25fd4753ea815c840",
+                "reference": "c417d0ac067daa4351112ed25fd4753ea815c840",
                 "shasum": ""
             },
             "require": {
@@ -938,7 +938,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2014-09-22 11:59:59"
+            "time": "2014-09-22 13:46:08"
         }
     ],
     "packages-dev": [
@@ -1633,12 +1633,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Filesystem.git",
-                "reference": "7047190475324d9f85470129074165b6f020c430"
+                "reference": "7d97789ea01c3c76ecaa59b954d162777033cbd4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Filesystem/zipball/7047190475324d9f85470129074165b6f020c430",
-                "reference": "7047190475324d9f85470129074165b6f020c430",
+                "url": "https://api.github.com/repos/symfony/Filesystem/zipball/7d97789ea01c3c76ecaa59b954d162777033cbd4",
+                "reference": "7d97789ea01c3c76ecaa59b954d162777033cbd4",
                 "shasum": ""
             },
             "require": {
@@ -1671,7 +1671,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "http://symfony.com",
-            "time": "2014-09-22 12:37:50"
+            "time": "2014-09-22 15:54:44"
         },
         {
             "name": "symfony/stopwatch",

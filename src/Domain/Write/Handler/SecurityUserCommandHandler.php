@@ -3,6 +3,7 @@
 namespace Milio\User\Domain\Write\Handler;
 
 use Milio\CQRS\Command\MilioCommandHandler;
+use Milio\User\Domain\Write\Command\AddUserRoleCommand;
 use Milio\User\Domain\Write\Command\ChangeUsernameCommand;
 use Milio\User\Domain\Write\Command\RegisterUserCommand;
 use Milio\User\Domain\Write\Command\UpdateAccountStatusCommand;
@@ -73,6 +74,16 @@ class SecurityUserCommandHandler extends MilioCommandHandler
     {
         $aggregate = $this->loadAggregate($command->userId);
         $aggregate->updateAccountStatus($command->status);
+        $this->repository->add($aggregate);
+    }
+
+    /**
+     * @param AddUserRoleCommand $command
+     */
+    public function handleAddUserRoleCommand(AddUserRoleCommand $command)
+    {
+        $aggregate = $this->loadAggregate($command->userId);
+        $aggregate->addUserRole($command->userRole);
         $this->repository->add($aggregate);
     }
 

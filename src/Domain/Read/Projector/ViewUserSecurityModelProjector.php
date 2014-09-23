@@ -9,6 +9,7 @@ use Milio\User\Domain\Write\Event\UserRegisteredEvent;
 use Milio\User\Domain\Write\Event\UsernameChangedEvent;
 use Milio\User\Domain\Read\Model\ViewUserSecurity;
 use Milio\User\Domain\Write\Event\AccountStatusUpdatedEvent;
+use Milio\User\Domain\Write\Event\UserRoleAddedEvent;
 
 /**
  * The user read model projector is responsible for applying the events to the read model.
@@ -81,6 +82,25 @@ class ViewUserSecurityModelProjector extends Projector
     {
         $model = $this->retrieveModel($event->userId);
         $model->accountStatus = $event->updated;
+        $this->repository->save($model);
+    }
+
+    /**
+     * To consider,is this really the best way?
+     * @param UserRoleAddedEvent $event
+     */
+    public function applyUserRoleAddedEvent(UserRoleAddedEvent $event)
+    {
+        $model = $this->retrieveModel($event->userId);
+
+        $rolesArray = $model->getRoles();
+        //make sure to not save duplicates
+        if (in_array($event->userRole, $rolesArray, true)) {
+            return;
+        }
+        $rolesArray[] = $event->userRole;
+        $roles = implode(' ', $rolesArray);
+        $model->roles = $roles;
         $this->repository->save($model);
     }
 

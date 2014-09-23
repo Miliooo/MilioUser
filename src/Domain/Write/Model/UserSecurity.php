@@ -9,6 +9,7 @@ use Milio\User\Domain\Write\Event\AccountStatusUpdatedEvent;
 use Milio\User\Domain\Write\Event\UserRegisteredEvent;
 use Milio\User\Domain\ValueObjects\Username;
 use Milio\User\Domain\Write\Event\UsernameChangedEvent;
+use Milio\User\Domain\Write\Event\UserRoleAddedEvent;
 
 /**
  * The user security model is used for logging in users. For giving them more or less rights.
@@ -23,7 +24,8 @@ class UserSecurity extends EventSourcedAggregateRoot
     CONST ACCOUNT_STATUS_ACTIVE = "active";
     CONST ACCOUNT_STATUS_LOCKED = "locked";
     CONST ACCOUNT_STATUS_DELETED = "deleted";
-    CONST ACCOUNT_STATUS_AWAITING_CONFIRMATION = "aw_conf";
+    CONST ACCOUNT_STATUS_AWAITING_MODERATION_CONFIRMATION = "aw_mod_conf";
+    const ACCOUNT_STATUS_AWAITING_EMAIL_CONFIRMATION = "aw_email_conf";
     CONST ACCOUNT_STATUS_EXPIRED = "expired";
 
     /**
@@ -118,9 +120,30 @@ class UserSecurity extends EventSourcedAggregateRoot
     }
 
     /**
+     * @param $userRole
+     */
+    public function addUserRole($userRole)
+    {
+        // idempotent do not add it if the role is already there.
+        if (in_array($userRole, $this->roles, true)) {
+            return;
+        }
+
+        $this->apply(new UserRoleAddedEvent($this->userId, $userRole));
+    }
+
+    /**
+     * @param UserRoleAddedEvent $event
+     */
+    protected function applyUserRoleAddedEvent(UserRoleAddedEvent $event)
+    {
+        $this->roles[] = $event->userRole;
+    }
+
+    /**
      * @param AccountStatusUpdatedEvent $event
      */
-    public function applyAccountStatusUpdatedEvent(AccountStatusUpdatedEvent $event)
+    protected function applyAccountStatusUpdatedEvent(AccountStatusUpdatedEvent $event)
     {
         $this->accountStatus = $event->updated;
     }
@@ -128,7 +151,7 @@ class UserSecurity extends EventSourcedAggregateRoot
     /**
      * @param UsernameChangedEvent $event
      */
-    public function applyUserNameChangedEvent(UsernameChangedEvent $event)
+    protected function applyUserNameChangedEvent(UsernameChangedEvent $event)
     {
         $this->username = $event->getUpdatedUsername();
     }
@@ -136,7 +159,7 @@ class UserSecurity extends EventSourcedAggregateRoot
     /**
      * @param UserRegisteredEvent $event
      */
-    public function applyUserRegisteredEvent(UserRegisteredEvent $event)
+    protected function applyUserRegisteredEvent(UserRegisteredEvent $event)
     {
         $this->userId = (string) $event->userId;
         $this->username = $event->username;

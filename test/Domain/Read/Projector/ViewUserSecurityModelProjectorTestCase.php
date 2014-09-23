@@ -8,6 +8,7 @@ use Milio\User\Domain\Utils\TestUtils;
 use Milio\User\Domain\Read\Model\ViewUserSecurity;
 use Milio\User\Domain\Write\Event\AccountStatusUpdatedEvent;
 use Milio\User\Domain\Write\Event\UsernameChangedEvent;
+use Milio\User\Domain\Write\Event\UserRoleAddedEvent;
 use Milio\User\Domain\Write\Model\UserSecurity;
 
 /**
@@ -50,7 +51,7 @@ class ViewUserSecurityModelProjectorTestCase extends ProjectorScenarioTestCase
     /**
      * @test
      */
-    public function it_can_update_the_account_status()
+    public function it_updates_the_account_status()
     {
         $userRegisteredEvent = TestUtils::getUserRegisteredEvent();
         $accountStatusUpdatedEvent = new AccountStatusUpdatedEvent(
@@ -64,6 +65,24 @@ class ViewUserSecurityModelProjectorTestCase extends ProjectorScenarioTestCase
             ->when($accountStatusUpdatedEvent)
             ->then([$expectedModel]);
     }
+
+    /**
+     * @test
+     */
+    public function it_adds_roles()
+    {
+        $userRegisteredEvent = TestUtils::getUserRegisteredEvent();
+        $userRoleAddedEvent = new UserRoleAddedEvent(TestUtils::USER_ID, 'ROLE_ADMIN');
+        $expectedModel = $this->getModelWhenRegistered();
+        $expectedModel->roles = UserSecurity::DEFAULT_ROLE." ROLE_ADMIN";
+
+        $this->assertEquals([UserSecurity::DEFAULT_ROLE, 'ROLE_ADMIN'], $expectedModel->getRoles());
+
+        $this->scenario->given([$userRegisteredEvent, $userRoleAddedEvent])
+            ->when($userRoleAddedEvent)
+            ->then([$expectedModel]);
+    }
+
 
     /**
      * The expected user model when an user does an user registered event by using test utils.
